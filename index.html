@@ -3,522 +3,374 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SuryaClean — Solar Shop & Installation Configurator</title>
+<title>☀️ SuryaClean — Cleaning | IoT Monitors | Installation | AMC</title>
 <style>
-:root { --gold:#F5A623; --blue:#4A90D9; --navy:#1B2A4A; --green:#27AE60; --red:#e74c3c; --bg:#f5f7fa; --card:#fff; --border:#e8ecf1; --radius:14px; --shadow:0 2px 12px rgba(0,0,0,0.05); }
+:root{--gold:#F5A623;--blue:#4A90D9;--navy:#1B2A4A;--green:#27AE60;--red:#e74c3c;--bg:#f5f7fa;--card:#fff;--rds:14px;--sh:0 2px 12px rgba(0,0,0,0.05)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:#1a1a2e;line-height:1.6}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
-.nav{background:var(--navy);color:#fff;padding:14px 0;position:sticky;top:0;z-index:100}
-.nav .container{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.nav .logo{font-size:20px;font-weight:800;color:var(--gold);text-decoration:none;white-space:nowrap}
-.nav .logo span{color:#fff}
-.nav-links{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.nav-links a{color:#ccc;text-decoration:none;font-size:13px;font-weight:500;cursor:pointer}
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:#1a1a2e;line-height:1.6}
+.container{max-width:1150px;margin:0 auto;padding:0 20px}
+
+.navbar{background:var(--navy);padding:12px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.navbar .logo{font-size:20px;font-weight:800;color:var(--gold);text-decoration:none;white-space:nowrap}
+.navbar .logo span{color:#fff}
+.nav-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.nav-links a{color:#ccc;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer;transition:color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--gold)}
-.cart-badge{background:var(--gold);color:#000;border-radius:50%;padding:1px 7px;font-size:11px;font-weight:700;margin-left:4px;display:inline-block;min-width:20px;text-align:center}
-h2{font-size:26px;font-weight:700;margin-bottom:6px}
-.subtitle{color:#777;margin-bottom:28px;font-size:14px}
-.card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.btn{padding:10px 22px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.cart-badge{background:var(--gold);color:#000;border-radius:50%;padding:1px 6px;font-size:10px;font-weight:700;margin-left:3px;display:inline-block;min-width:18px;text-align:center}
+.btn{padding:10px 22px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:none;display:inline-block;text-decoration:none;transition:all .2s}
 .btn-gold{background:linear-gradient(135deg,var(--gold),#e8951a);color:#fff}
-.btn-gold:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(245,166,35,0.4)}
-.btn-outline{background:#fff;color:var(--blue);border:2px solid var(--blue)}
-.btn-outline:hover{background:var(--blue);color:#fff}
-.btn-sm{padding:6px 14px;font-size:12px}
-.btn-green{background:var(--green);color:#fff}
-.btn-danger{background:var(--red);color:#fff}
-.price{font-size:22px;font-weight:800;color:var(--gold)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(245,166,35,0.3)}
+.btn-white{background:#fff;color:var(--gold);border:2px solid var(--gold)}
+.btn-white:hover{background:var(--gold);color:#fff}
+.btn-ol{background:transparent;color:#fff;border:2px solid #fff}
+.btn-sm{padding:6px 14px;font-size:11px}
+
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#0f3460 100%);color:#fff;padding:56px 0 44px;text-align:center}
+.hero h1{font-size:38px;font-weight:800;margin-bottom:8px}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:16px;opacity:0.9;max-width:600px;margin:0 auto 20px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+.section{padding:44px 0}
+.section h2{font-size:26px;font-weight:700;text-align:center;margin-bottom:4px}
+.section .sub{text-align:center;color:#777;max-width:500px;margin:0 auto 30px;font-size:13px}
+.card{background:var(--card);border-radius:var(--rds);padding:20px;box-shadow:var(--sh);border:1px solid #eee}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+
+.price-tag{font-size:22px;font-weight:800;color:var(--gold)}
 .price-sm{font-size:16px;font-weight:700;color:var(--gold)}
-.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:600}
+.badge-best{background:#fff3e0;color:#e65100}
 .badge-hot{background:#fce4ec;color:#c62828}
 .badge-new{background:#e8f5e9;color:#2e7d32}
-.badge-best{background:#fff3e0;color:#e65100}
-.tag{font-size:11px;color:#888;margin-top:2px}
-.qty-ctrl{display:flex;align-items:center;gap:4px}
-.qty-ctrl button{width:28px;height:28px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
-.qty-ctrl span{min-width:24px;text-align:center;font-weight:600}
-.sticky-cart{position:fixed;bottom:0;left:0;right:0;background:var(--navy);color:#fff;padding:14px 20px;z-index:200;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,0.2)}
-.sticky-cart .total{font-size:20px;font-weight:800;color:var(--gold)}
-.cart-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:flex;align-items:center;justify-content:center}
-.cart-modal .modal{background:#fff;border-radius:var(--radius);max-width:600px;width:95%;max-height:85vh;overflow-y:auto;padding:24px}
-.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #eee;align-items:center}
-.cart-item img{width:48px;height:48px;border-radius:8px;object-fit:contain;background:#f5f5f5}
-.cart-item .info{flex:1;min-width:0}
-.cart-item .info h4{font-size:14px;margin-bottom:2px}
-.cart-item .info p{font-size:12px;color:#888}
-.section{padding:40px 0}
-select,input[type=number]{padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit}
-.config-summary{background:linear-gradient(135deg,var(--navy),#0f3460);color:#fff;border-radius:var(--radius);padding:24px}
-.config-summary h3{color:var(--gold);margin-bottom:12px}
-.config-summary .line{display:flex;justify-content:space-between;padding:5px 0;font-size:14px}
-.config-summary .line.total{border-top:2px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:10px;font-size:18px;font-weight:800}
-.config-summary .line.total span:last-child{color:var(--gold)}
-.product-card{text-align:center;transition:transform .2s;position:relative;overflow:hidden}
+.badge-eco{background:#e3f2fd;color:#1565c0}
+
+.pricing-card{text-align:center;padding:24px 18px;border-radius:var(--rds);background:var(--card);border:2px solid #eee;position:relative}
+.pricing-card.featured{border-color:var(--gold);transform:scale(1.03);box-shadow:0 8px 24px rgba(245,166,35,0.15);z-index:1}
+.pricing-card.featured::before{content:'⭐ Most Popular';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap}
+.pricing-card h4{font-size:16px;margin-bottom:2px}
+.pricing-card .price{font-size:26px;font-weight:800;color:var(--gold);margin:8px 0}
+.pricing-card .price small{font-size:12px;color:#999;font-weight:400}
+.pricing-card ul{list-style:none;text-align:left;margin:10px 0}
+.pricing-card ul li{padding:4px 0;font-size:11px;color:#555}
+.pricing-card ul li::before{content:'✓ ';color:var(--green);font-weight:700}
+
+.product-card{text-align:center;transition:transform .2s;cursor:pointer}
 .product-card:hover{transform:translateY(-3px)}
-.product-card img{width:100%;height:160px;object-fit:contain;margin-bottom:8px}
-.product-card h4{font-size:14px;margin-bottom:4px}
-.product-card .specs{font-size:11px;color:#888;margin-bottom:4px}
-.toast{position:fixed;top:20px;right:20px;background:#333;color:#fff;padding:12px 20px;border-radius:8px;z-index:400;animation:slideIn .3s}
+.product-card .icon{font-size:56px;display:block;margin-bottom:6px}
+.product-card h4{font-size:13px;margin-bottom:3px}
+.product-card .specs{font-size:10px;color:#888;margin-bottom:3px;line-height:1.4}
+.product-card .tag{font-size:9px;color:#999}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:300;display:flex;align-items:center;justify-content:center}
+.modal{background:#fff;border-radius:var(--rds);max-width:560px;width:94%;max-height:85vh;overflow-y:auto;padding:28px;position:relative}
+.modal .close{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer;color:#999}
+.modal h3{font-size:20px;margin-bottom:8px}
+.modal .gallery{display:flex;gap:8px;margin:12px 0;overflow-x:auto}
+.modal .gallery div{min-width:120px;height:80px;background:#f0f4f8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.modal .reviews{max-height:120px;overflow-y:auto;margin:8px 0}
+.modal .review{border-bottom:1px solid #eee;padding:6px 0;font-size:12px}
+.modal .review .stars{color:var(--gold)}
+.modal table{width:100%;font-size:12px;border-collapse:collapse;margin:8px 0}
+.modal table td{padding:6px 8px;border-bottom:1px solid #f0f0f0}
+.modal table td:first-child{color:#888;white-space:nowrap}
+
+.qty-ctrl{display:flex;align-items:center;gap:3px}
+.qty-ctrl button{width:24px;height:24px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;font-weight:700;font-size:14px}
+.qty-ctrl span{min-width:20px;text-align:center;font-weight:600;font-size:13px}
+
+.sticky-cart{position:fixed;bottom:0;left:0;right:0;background:var(--navy);color:#fff;padding:10px 20px;z-index:200;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;box-shadow:0 -4px 20px rgba(0,0,0,0.2);font-size:13px}
+.sticky-cart .total{font-size:18px;font-weight:800;color:var(--gold)}
+
+.cart-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee;align-items:center}
+.cart-item .info{flex:1;min-width:0}
+.cart-item .info h4{font-size:13px;margin-bottom:1px}
+.cart-item .info p{font-size:11px;color:#888}
+.config-summary{background:linear-gradient(135deg,var(--navy),#0f3460);color:#fff;border-radius:var(--rds);padding:20px}
+.config-summary h3{color:var(--gold);margin-bottom:8px}
+.config-summary .line{display:flex;justify-content:space-between;padding:4px 0;font-size:13px}
+.config-summary .line.total{border-top:2px solid rgba(255,255,255,0.2);margin-top:6px;padding-top:8px;font-size:16px;font-weight:800}
+.config-summary .line.total span:last-child{color:var(--gold)}
+.config-summary button{width:100%;margin-top:12px}
+
+.package-btn{background:var(--card);border:2px solid #eee;border-radius:var(--rds);padding:14px;cursor:pointer;text-align:center;transition:all .2s}
+.package-btn:hover{border-color:var(--gold)}
+.package-btn.selected{border-color:var(--gold);background:#fff8e1;box-shadow:0 0 0 3px rgba(245,166,35,0.15)}
+.package-btn h4{font-size:15px;color:var(--navy)}
+.package-btn .kw{font-size:24px;font-weight:800;color:var(--gold)}
+.package-btn .est{font-size:10px;color:#888}
+select,input[type=number]{padding:7px 10px;border:1px solid #ddd;border-radius:6px;font-size:12px;font-family:inherit}
+
+.toast{position:fixed;top:16px;right:16px;background:#333;color:#fff;padding:10px 18px;border-radius:8px;z-index:500;animation:slideIn .3s;font-size:13px}
 .toast.success{background:var(--green)}
 @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-@media(max-width:768px){.sticky-cart{flex-direction:column;text-align:center}.nav-links{gap:8px}.nav-links a{font-size:11px}}
-.package-btn{background:var(--card);border:2px solid #eee;border-radius:var(--radius);padding:16px;cursor:pointer;text-align:center;transition:all .2s}
-.package-btn:hover{border-color:var(--gold);transform:translateY(-2px)}
-.package-btn.selected{border-color:var(--gold);background:#fff8e1;box-shadow:0 0 0 3px rgba(245,166,35,0.15)}
-.package-btn h4{font-size:18px;color:var(--navy)}
-.package-btn .kw{font-size:28px;font-weight:800;color:var(--gold)}
-.package-btn .est{font-size:12px;color:#888}
+.hidden{display:none!important}
+.scroll-top{position:fixed;bottom:80px;right:20px;width:38px;height:38px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 12px rgba(245,166,35,0.3);z-index:99}
+footer{background:var(--navy);color:#fff;padding:32px 0 16px;text-align:center;font-size:12px}
+footer a{color:var(--gold);text-decoration:none}
+@media(max-width:768px){.hero h1{font-size:26px}.nav-links a{font-size:10px}}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav"><div class="container">
-  <a href="#" class="logo">☀️ Surya<span>Clean</span> Shop</a>
-  <div class="nav-links">
-    <a href="#shop" class="active" onclick="scrollToSection('shop')">🛒 Smart Monitors</a>
-    <a href="#install" onclick="scrollToSection('install')">🔧 Solar Installation</a>
-    <a href="#cart-section" onclick="scrollToSection('cart-section')">Cart <span class="cart-badge" id="cartCountNav">0</span></a>
-  </div>
+<nav class="navbar"><div class="container">
+<a href="#" class="logo">☀️ Surya<span>Clean</span></a>
+<div class="nav-links">
+<a href="#cleaning" onclick="go('cleaning')">🧹 Cleaning</a>
+<a href="#amc" onclick="go('amc')">📋 AMC</a>
+<a href="#shop" onclick="go('shop')">🛒 IoT Shop</a>
+<a href="#install" onclick="go('install')">🔧 Install</a>
+<a href="#cart" onclick="go('cart')">Cart <span class="cart-badge" id="cartCntNav">0</span></a>
+</div>
 </div></nav>
 
-<!-- ===== IOT SMART MONITOR SHOP ===== -->
-<div class="section" id="shop"><div class="container">
-  <h2>📟 Smart Solar Monitors & IoT Trackers</h2>
-  <p class="subtitle">Real-time power generation tracking, historical data, and personalized alerts. Compatible with all major inverters.</p>
-
-  <div class="grid4">
-    <!-- Product 1: Sense Energy Monitor -->
-    <div class="card product-card">
-      <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;">⚡</div>
-      <span class="badge badge-best">Best Seller</span>
-      <h4>Sense Energy Monitor</h4>
-      <p class="specs">Real-time solar + home energy tracking | ML-powered device detection | WiFi</p>
-      <div class="price-sm">₹27,999</div>
-      <p class="tag">Compatible: All inverters | Free app</p>
-      <button class="btn btn-gold btn-sm" onclick="addToCart('sense','Sense Energy Monitor','₹27,999',27999,'⚡')" style="margin-top:8px;width:100%">Add to Cart</button>
-    </div>
-
-    <!-- Product 2: Emporia Vue Gen 3 -->
-    <div class="card product-card">
-      <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;">🔌</div>
-      <span class="badge badge-hot">Popular</span>
-      <h4>Emporia Vue Gen 3</h4>
-      <p class="specs">16-circuit monitoring | Solar net metering tracking | WiFi + Bluetooth</p>
-      <div class="price-sm">₹18,499</div>
-      <p class="tag">Best for detailed circuit-level data</p>
-      <button class="btn btn-gold btn-sm" onclick="addToCart('emporia','Emporia Vue Gen 3','₹18,499',18499,'🔌')" style="margin-top:8px;width:100%">Add to Cart</button>
-    </div>
-
-    <!-- Product 3: Shelly Pro 3EM -->
-    <div class="card product-card">
-      <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;">📊</div>
-      <span class="badge badge-new">Pro Grade</span>
-      <h4>Shelly Pro 3EM</h4>
-      <p class="specs">3-phase monitoring | DIN rail mount | MQTT/Home Assistant | WiFi+LAN</p>
-      <div class="price-sm">₹12,999</div>
-      <p class="tag">Best for 3-phase commercial systems</p>
-      <button class="btn btn-gold btn-sm" onclick="addToCart('shelly','Shelly Pro 3EM','₹12,999',12999,'📊')" style="margin-top:8px;width:100%">Add to Cart</button>
-    </div>
-
-    <!-- Product 4: SolarEdge HD-Wave Inverter Monitor -->
-    <div class="card product-card">
-      <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;">📡</div>
-      <span class="badge badge-new">OEM Grade</span>
-      <h4>SolarEdge Modbus Meter + Gateway</h4>
-      <p class="specs">Native SolarEdge integration | Per-panel monitoring | Cloud dashboard</p>
-      <div class="price-sm">₹15,999</div>
-      <p class="tag">Only for SolarEdge inverters</p>
-      <button class="btn btn-gold btn-sm" onclick="addToCart('solaredge','SolarEdge Monitoring Kit','₹15,999',15999,'📡')" style="margin-top:8px;width:100%">Add to Cart</button>
-    </div>
-
-    <!-- Product 5: Enphase Envoy -->
-    <div class="card product-card">
-      <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;">🛰️</div>
-      <h4>Enphase IQ Envoy Gateway</h4>
-      <p class="specs">Microinverter monitoring | Per-panel data | Enlighten cloud platform</p>
-      <div class="price-sm">₹22,999</div>
-      <p class="tag">Only for Enphase microinverters</p>
-      <button class="btn btn-gold btn-sm" onclick="addToCart('enphase','Enphase IQ Envoy','₹22,999',22999,'🛰️')" style="margin-top:8px;width:100%">Add to Cart</button>
-    </div>
-
-    <!-- Product 6: GismoPower IoT Monitor -->
-    <div class="card product-card">
-      <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;">🌐</div>
-      <span class="badge badge-hot">India Made</span>
-      <h4>GismoPower Solar IoT Monitor</h4>
-      <p class="specs">Made in India | 4G/SIM connectivity | Works without WiFi | SMS alerts</p>
-      <div class="price-sm">₹9,999</div>
-      <p class="tag">Best for rural areas & farms</p>
-      <button class="btn btn-gold btn-sm" onclick="addToCart('gismo','GismoPower IoT Monitor','₹9,999',9999,'🌐')" style="margin-top:8px;width:100%">Add to Cart</button>
-    </div>
-  </div>
+<!-- HERO -->
+<section class="hero"><div class="container">
+<h1>The Complete <span>Solar Platform</span></h1>
+<p>Professional cleaning · Smart IoT monitoring · Full installation · AMC plans — for Faridabad & NCR</p>
+<div class="hero-btns">
+<a href="#cleaning" class="btn btn-gold" onclick="go('cleaning')">Book Cleaning Demo</a>
+<a href="#shop" class="btn btn-ol" onclick="go('shop')">Smart Monitors</a>
+<a href="#install" class="btn btn-ol" onclick="go('install')">Installation Calculator</a>
 </div>
+</div></section>
 
-<!-- ===== SOLAR INSTALLATION CONFIGURATOR ===== -->
-<div class="section" id="install" style="background:#fff"><div class="container">
-  <h2>🔧 Solar Installation Configurator</h2>
-  <p class="subtitle">Choose from pre-built packages or customize every component. Real-time price & estimated install date.</p>
-
-  <!-- QUICK PACKAGES -->
-  <h3 style="margin-bottom:12px">⚡ Quick Packages</h3>
-  <div class="grid4" style="margin-bottom:24px">
-    <div class="package-btn" onclick="selectPackage('2kW')" id="pkg-2kW">
-      <h4>🏠 Small Home</h4><div class="kw">2 kW</div><div class="est">Est. ₹1.2L – ₹1.5L</div><div class="tag">4 panels · 1 battery</div>
-    </div>
-    <div class="package-btn selected" onclick="selectPackage('3kW')" id="pkg-3kW">
-      <h4>🏡 Standard Home</h4><div class="kw">3 kW</div><div class="est">Est. ₹1.8L – ₹2.2L</div><div class="tag">6 panels · PM Surya Ghar eligible</div>
-    </div>
-    <div class="package-btn" onclick="selectPackage('5kW')" id="pkg-5kW">
-      <h4>🏘️ Large Home</h4><div class="kw">5 kW</div><div class="est">Est. ₹2.8L – ₹3.4L</div><div class="tag">10 panels · full home backup</div>
-    </div>
-    <div class="package-btn" onclick="selectPackage('10kW')" id="pkg-10kW">
-      <h4>🏢 Commercial</h4><div class="kw">10 kW</div><div class="est">Est. ₹5.5L – ₹6.5L</div><div class="tag">20 panels · 3-phase</div>
-    </div>
-  </div>
-
-  <!-- CUSTOM COMPONENT SELECTION -->
-  <div class="grid2">
-    <!-- Left: Component Selection -->
-    <div>
-      <h4 style="margin-bottom:8px">1️⃣ Solar Panels</h4>
-      <select id="panelSelect" onchange="updateConfig()" style="width:100%;margin-bottom:12px">
-        <optgroup label="🏆 Premium Tier (25yr warranty)">
-          <option value="tata-540" data-price="28000" data-watts="540" data-brand="Tata Power Solar">Tata Power Solar 540W Mono PERC Bifacial — ₹28,000/panel</option>
-          <option value="waaree-545" data-price="26500" data-watts="545" data-brand="WAAREE Energies">WAAREE 545W Mono PERC Half-Cut — ₹26,500/panel</option>
-          <option value="vikram-540" data-price="27000" data-watts="540" data-brand="Vikram Solar">Vikram Solar 540W Mono PERC — ₹27,000/panel</option>
-        </optgroup>
-        <optgroup label="✅ Value Tier (25yr warranty)">
-          <option value="loom-450" data-price="18000" data-watts="450" data-brand="Loom Solar">Loom Solar 450W Mono PERC Shark — ₹18,000/panel</option>
-          <option value="renew-445" data-price="16500" data-watts="445" data-brand="RenewSys">RenewSys 445W Mono PERC — ₹16,500/panel</option>
-          <option value="jakson-440" data-price="16000" data-watts="440" data-brand="Jakson">Jakson 440W Polycrystalline — ₹16,000/panel</option>
-        </optgroup>
-      </select>
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
-        <span>Qty:</span>
-        <div class="qty-ctrl">
-          <button onclick="changePanelQty(-1)">−</button>
-          <span id="panelQty">6</span>
-          <button onclick="changePanelQty(1)">+</button>
-        </div>
-        <span style="font-size:12px;color:#888" id="panelTotalInfo">6 × 540W = 3.24 kW</span>
-      </div>
-
-      <h4 style="margin-bottom:8px">2️⃣ Inverter</h4>
-      <select id="inverterSelect" onchange="updateConfig()" style="width:100%;margin-bottom:16px">
-        <optgroup label="String Inverters">
-          <option value="growatt-3kw" data-price="32000" data-watts="3000" data-brand="Growatt">Growatt 3kW String — ₹32,000</option>
-          <option value="growatt-5kw" data-price="45000" data-watts="5000" data-brand="Growatt">Growatt 5kW String — ₹45,000</option>
-          <option value="sungrow-5kw" data-price="48000" data-watts="5000" data-brand="Sungrow">Sungrow 5kW String — ₹48,000</option>
-          <option value="fronius-5kw" data-price="72000" data-watts="5000" data-brand="Fronius (Austria)">Fronius Primo 5kW — ₹72,000</option>
-          <option value="havells-5kw" data-price="42000" data-watts="5000" data-brand="Havells">Havells 5kW String — ₹42,000</option>
-        </optgroup>
-        <optgroup label="Hybrid Inverters (Grid + Battery)">
-          <option value="growatt-hybrid-5kw" data-price="68000" data-watts="5000" data-brand="Growatt Hybrid">Growatt SPF 5000 ES Hybrid 5kW — ₹68,000</option>
-          <option value="sofar-hybrid-5kw" data-price="72000" data-watts="5000" data-brand="Sofar">Sofar HYD 5000-ES Hybrid 5kW — ₹72,000</option>
-          <option value="deye-hybrid-5kw" data-price="78000" data-watts="5000" data-brand="Deye">Deye SUN-5K-SG03LP1 Hybrid 5kW — ₹78,000</option>
-        </optgroup>
-        <optgroup label="Microinverters">
-          <option value="enphase-iq7" data-price="8500" data-watts="290" data-brand="Enphase">Enphase IQ7+ Microinverter (per panel) — ₹8,500/panel</option>
-        </optgroup>
-      </select>
-
-      <h4 style="margin-bottom:8px">3️⃣ Battery Storage (Optional)</h4>
-      <select id="batterySelect" onchange="updateConfig()" style="width:100%;margin-bottom:16px">
-        <option value="none" data-price="0" data-wh="0">None — Grid-tie only</option>
-        <option value="luminous-2.5" data-price="65000" data-wh="2500">Luminous 2.5 kWh LiFePO4 — ₹65,000</option>
-        <option value="exide-3.5" data-price="85000" data-wh="3500">Exide Solatubular 3.5 kWh — ₹85,000</option>
-        <option value="okaya-5" data-price="110000" data-wh="5000">Okaya 5 kWh Lithium — ₹1,10,000</option>
-        <option value="livguard-10" data-price="210000" data-wh="10000">Livguard 10 kWh Lithium Stack — ₹2,10,000</option>
-      </select>
-
-      <h4 style="margin-bottom:8px">4️⃣ Mounting Structure</h4>
-      <select id="mountSelect" onchange="updateConfig()" style="width:100%;margin-bottom:16px">
-        <option value="gi" data-price="8000">GI Standard (Tin roof) — ₹8,000/kW</option>
-        <option value="aluminum" data-price="12000">Aluminum Elevated (Flat roof) — ₹12,000/kW</option>
-        <option value="tracking" data-price="25000">Single-Axis Tracking — ₹25,000/kW</option>
-      </select>
-
-      <h4 style="margin-bottom:8px">5️⃣ Balance of System (BOS)</h4>
-      <div style="font-size:13px;color:#666;line-height:2">
-        <label><input type="checkbox" id="dcCables" checked onchange="updateConfig()"> DC Cables (6mm² copper) — ₹8,500</label><br>
-        <label><input type="checkbox" id="acCables" checked onchange="updateConfig()"> AC Cables + MCB/SPD — ₹12,000</label><br>
-        <label><input type="checkbox" id="earthing" checked onchange="updateConfig()"> Earthing Kit (copper rod + chemicals) — ₹5,500</label><br>
-        <label><input type="checkbox" id="netMeter" checked onchange="updateConfig()"> Net Meter (DISCOM approved) — ₹8,000</label><br>
-        <label><input type="checkbox" id="lightningArrestor" onchange="updateConfig()"> Lightning Arrestor — ₹4,500</label><br>
-        <label><input type="checkbox" id="birdMeshKit" onchange="updateConfig()"> Bird Mesh Kit (Pigeon netting) — ₹6,000</label><br>
-        <label><input type="checkbox" id="remoteMonitor" onchange="updateConfig()"> WiFi/GPRS Remote Monitor — ₹5,500</label><br>
-      </div>
-    </div>
-
-    <!-- Right: Real-time Summary -->
-    <div class="config-summary">
-      <h3>📋 Installation Summary</h3>
-      <div id="configDetails"></div>
-      <div class="line total"><span>TOTAL (excl. subsidy)</span><span id="totalPrice">₹0</span></div>
-      <div class="line" style="color:#4caf50;font-size:14px;margin-top:4px"><span>PM Surya Ghar Subsidy (est.)</span><span id="subsidyAmt">−₹0</span></div>
-      <div class="line" style="font-weight:700;font-size:16px"><span>Effective Cost</span><span id="effectiveCost">₹0</span></div>
-      <div class="line" style="margin-top:8px"><span>System Capacity</span><span id="totalCapacity">3.24 kW</span></div>
-      <div class="line"><span>Annual Generation (est.)</span><span id="annualGen">4,860 units</span></div>
-      <div class="line"><span>Annual Savings @₹7/unit</span><span id="annualSavings">₹0</span></div>
-      <div class="line"><span>CO₂ Offset</span><span id="co2offset">0 tons/year</span></div>
-      <div class="line" style="color:var(--gold);font-weight:700;margin-top:8px"><span>📅 Est. Install Date</span><span id="installDate">—</span></div>
-      <button class="btn btn-gold" style="width:100%;margin-top:16px" onclick="addInstallationToCart()">🛒 Add to Cart & Book Installation</button>
-    </div>
-  </div>
-</div></div>
-
-<!-- ===== CART SECTION ===== -->
-<div class="section" id="cart-section" style="background:#f9fafb"><div class="container">
-  <h2>🛒 Your Cart</h2>
-  <div id="cartItems"><p style="color:#999;text-align:center;padding:40px">Your cart is empty. Add smart monitors or a solar installation above.</p></div>
-  <div id="cartSummary" style="display:none;text-align:right;margin-top:16px;padding-top:16px;border-top:2px solid #eee">
-    <p style="font-size:20px;font-weight:800">Total: <span id="cartTotal" style="color:var(--gold)">₹0</span></p>
-    <p style="font-size:12px;color:#888">Includes installation & GST. Subsidy deducted at payment.</p>
-    <button class="btn btn-gold" onclick="checkout()" style="margin-top:8px">Proceed to Checkout (UPI) 💳</button>
-    <button class="btn btn-outline btn-sm" onclick="clearCart()" style="margin-left:8px">Clear Cart</button>
-  </div>
-</div></div>
-
-<!-- STICKY CART BAR -->
-<div class="sticky-cart" id="stickyCart" style="display:none">
-  <span>🛒 <span id="stickyCount">0</span> items</span>
-  <span class="total">₹<span id="stickyTotal">0</span></span>
-  <button class="btn btn-gold btn-sm" onclick="scrollToSection('cart-section')">View Cart & Checkout</button>
+<!-- ====== CLEANING ====== -->
+<section class="section" id="cleaning"><div class="container">
+<h2>🧹 Professional Solar Panel Cleaning</h2>
+<p class="sub">Dirty panels lose 15-30% power. Our trained, insured workers make them shine.</p>
+<div class="g3">
+<div class="pricing-card"><h4>1-2 kW</h4><p style="color:#888;font-size:11px">Small Home · 3-6 panels</p><div class="price">₹499</div><ul><li>Soft brush + purified water</li><li>Before/after photos</li><li>GPS-tracked visit</li></ul><button class="btn btn-gold" onclick="quickBook('1-2kW',499)" style="width:100%">Book — ₹499</button></div>
+<div class="pricing-card featured"><h4>3-5 kW</h4><p style="color:#888;font-size:11px">Standard Home · 9-15 panels</p><div class="price">₹899</div><ul><li>Professional water-fed pole</li><li>Visual inspection</li><li>Insured service</li><li>WhatsApp photo report</li></ul><button class="btn btn-gold" onclick="quickBook('3-5kW',899)" style="width:100%">Book — ₹899</button></div>
+<div class="pricing-card"><h4>6-10 kW</h4><p style="color:#888;font-size:11px">Large Home · 18-30 panels</p><div class="price">₹1,499</div><ul><li>2-worker team</li><li>Full inspection</li><li>Bird dropping treatment</li></ul><button class="btn btn-gold" onclick="quickBook('6-10kW',1499)" style="width:100%">Book — ₹1,499</button></div>
 </div>
+<!-- Booking form (hidden until click) -->
+<div id="bookingForm" class="card hidden" style="max-width:500px;margin:16px auto 0">
+<h4>Quick Book: <span id="bookTitle" style="color:var(--gold)"></span></h4>
+<div style="margin:8px 0"><label style="font-size:12px;font-weight:600">Address</label><input type="text" id="bookAddr" placeholder="House No., Colony, Landmark" style="width:100%"></div>
+<div style="margin:8px 0"><label style="font-size:12px;font-weight:600">Preferred Date</label><input type="date" id="bookDate" style="width:100%"></div>
+<div style="margin:8px 0"><label style="font-size:12px;font-weight:600">Time Slot</label><select id="bookTime" style="width:100%"><option>09:00 AM - 10:00 AM</option><option>10:00 AM - 11:00 AM</option><option>11:00 AM - 12:00 PM</option><option>02:00 PM - 03:00 PM</option><option>04:00 PM - 05:00 PM</option></select></div>
+<div style="margin:8px 0"><label style="font-size:12px;font-weight:600">Notes</label><input type="text" id="bookNotes" placeholder="Gate code, pet, etc. (optional)" style="width:100%"></div>
+<div style="font-size:18px;font-weight:800;color:var(--gold);margin:8px 0">Total: ₹<span id="bookTotal">0</span></div>
+<button class="btn btn-gold" onclick="confirmBooking()" style="width:100%">Confirm & Add to Cart</button>
+</div>
+</div></section>
 
+<!-- ====== AMC ====== -->
+<section class="section" id="amc" style="background:#fff"><div class="container">
+<h2>📋 AMC Plans — Best Value</h2>
+<p class="sub">Save up to 17% vs one-time cleaning. Prices for 3-5 kW systems.</p>
+<div class="g3">
+<div class="pricing-card"><h4>Basic</h4><p style="color:#888;font-size:11px">2 visits/year</p><div class="price">₹1,599<small>/yr</small></div><ul><li>Pre & Post Monsoon</li><li>Standard cleaning</li><li>WhatsApp reminders</li></ul><button class="btn btn-gold" onclick="addToCart('amc-basic','AMC Basic (3-5kW)','₹1,599/yr',1599,'📋')" style="width:100%">Subscribe</button></div>
+<div class="pricing-card featured"><h4>Standard ⭐</h4><p style="color:#888;font-size:11px">4 visits/year</p><div class="price">₹2,999<small>/yr</small></div><ul><li>Quarterly visits</li><li>Visual inspection</li><li>Efficiency check</li><li>Priority scheduling</li></ul><button class="btn btn-gold" onclick="addToCart('amc-standard','AMC Standard (3-5kW)','₹2,999/yr',2999,'📋')" style="width:100%">Subscribe</button></div>
+<div class="pricing-card"><h4>Premium</h4><p style="color:#888;font-size:11px">6 visits/year</p><div class="price">₹4,999<small>/yr</small></div><ul><li>Bi-monthly visits</li><li>Thermal imaging</li><li>Detailed health report</li><li>Priority support</li></ul><button class="btn btn-gold" onclick="addToCart('amc-premium','AMC Premium (3-5kW)','₹4,999/yr',4999,'📋')" style="width:100%">Subscribe</button></div>
+</div>
+</div></section>
+
+<!-- ====== IOT SHOP ====== -->
+<section class="section" id="shop"><div class="container">
+<h2>📟 Smart Solar Monitors & IoT Trackers</h2>
+<p class="sub">Click any product for detailed specs, reviews & pictures. Real-time power generation tracking.</p>
+<div class="g4" id="productGrid"></div>
+</div></section>
+
+<!-- ====== INSTALLATION ====== -->
+<section class="section" id="install" style="background:#fff"><div class="container">
+<h2>🔧 Solar Installation Configurator</h2>
+<p class="sub">Choose packages or customize every component. Real-time pricing, subsidy & install date.</p>
+<div class="g4" style="margin-bottom:16px">
+<div class="package-btn" onclick="selPkg('2kW')" id="pkg-2kW"><h4>🏠 Small</h4><div class="kw">2 kW</div><div class="est">4 panels · ₹1.2L-1.5L</div></div>
+<div class="package-btn selected" onclick="selPkg('3kW')" id="pkg-3kW"><h4>🏡 Standard</h4><div class="kw">3 kW</div><div class="est">6 panels · Subsidy eligible</div></div>
+<div class="package-btn" onclick="selPkg('5kW')" id="pkg-5kW"><h4>🏘️ Large</h4><div class="kw">5 kW</div><div class="est">10 panels · ₹2.8L-3.4L</div></div>
+<div class="package-btn" onclick="selPkg('10kW')" id="pkg-10kW"><h4>🏢 Commercial</h4><div class="kw">10 kW</div><div class="est">20 panels · ₹5.5L-6.5L</div></div>
+</div>
+<div class="g2">
+<div>
+<h4 style="margin-bottom:4px">1️⃣ Panels</h4>
+<select id="psel" onchange="uc()" style="width:100%;margin-bottom:8px"><optgroup label="Premium"><option value="tata-540" data-p="28000" data-w="540" data-b="Tata Power Solar">Tata 540W Bifacial — ₹28,000</option><option value="waaree-545" data-p="26500" data-w="545" data-b="WAAREE">WAAREE 545W Half-Cut — ₹26,500</option><option value="vikram-540" data-p="27000" data-w="540" data-b="Vikram Solar">Vikram 540W Mono — ₹27,000</option></optgroup><optgroup label="Value"><option value="loom-450" data-p="18000" data-w="450" data-b="Loom Solar">Loom 450W Shark — ₹18,000</option><option value="renew-445" data-p="16500" data-w="445" data-b="RenewSys">RenewSys 445W — ₹16,500</option></optgroup></select>
+<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px">Qty: <div class="qty-ctrl"><button onclick="chgPQ(-1)">−</button><span id="pQty">6</span><button onclick="chgPQ(1)">+</button></div><span id="pInfo" style="font-size:11px;color:#888">6×540W=3.24kW</span></div>
+
+<h4 style="margin-bottom:4px">2️⃣ Inverter</h4>
+<select id="isel" onchange="uc()" style="width:100%;margin-bottom:8px"><optgroup label="String"><option value="growatt-3kw" data-p="32000" data-w="3000" data-b="Growatt">Growatt 3kW — ₹32,000</option><option value="growatt-5kw" data-p="45000" data-w="5000" data-b="Growatt" selected>Growatt 5kW — ₹45,000</option><option value="sungrow-5kw" data-p="48000" data-w="5000" data-b="Sungrow">Sungrow 5kW — ₹48,000</option><option value="fronius-5kw" data-p="72000" data-w="5000" data-b="Fronius">Fronius 5kW — ₹72,000</option></optgroup><optgroup label="Hybrid"><option value="growatt-hybrid-5kw" data-p="68000" data-w="5000" data-b="Growatt Hybrid">Growatt SPF 5kW Hybrid — ₹68,000</option><option value="deye-hybrid-5kw" data-p="78000" data-w="5000" data-b="Deye">Deye 5kW Hybrid — ₹78,000</option></optgroup></select>
+
+<h4 style="margin-bottom:4px">3️⃣ Battery</h4>
+<select id="bsel" onchange="uc()" style="width:100%;margin-bottom:8px"><option value="none" data-p="0">None</option><option value="luminous-2.5" data-p="65000" selected>Luminous 2.5kWh LiFePO4 — ₹65,000</option><option value="exide-3.5" data-p="85000">Exide 3.5kWh — ₹85,000</option><option value="okaya-5" data-p="110000">Okaya 5kWh Lithium — ₹1,10,000</option></select>
+
+<h4 style="margin-bottom:4px">4️⃣ Mounting</h4>
+<select id="msel" onchange="uc()" style="width:100%;margin-bottom:8px"><option value="gi" data-p="8000">GI Standard (Tin roof) — ₹8,000/kW</option><option value="aluminum" data-p="12000">Aluminum Elevated — ₹12,000/kW</option></select>
+
+<div style="font-size:11px;line-height:2.2;color:#555">
+<label><input type="checkbox" id="bos1" checked onchange="uc()"> DC Cables — ₹8,500</label><br>
+<label><input type="checkbox" id="bos2" checked onchange="uc()"> AC Cables + MCB — ₹12,000</label><br>
+<label><input type="checkbox" id="bos3" checked onchange="uc()"> Earthing Kit — ₹5,500</label><br>
+<label><input type="checkbox" id="bos4" checked onchange="uc()"> Net Meter — ₹8,000</label><br>
+<label><input type="checkbox" id="bos5" onchange="uc()"> Lightning Arrestor — ₹4,500</label><br>
+<label><input type="checkbox" id="bos6" onchange="uc()"> Bird Mesh — ₹6,000</label><br>
+<label><input type="checkbox" id="bos7" onchange="uc()"> Remote Monitor — ₹5,500</label>
+</div>
+</div>
+<div class="config-summary"><h3>📋 Summary</h3><div id="cfgDet"></div><div class="line total"><span>TOTAL</span><span id="cfgTotal">₹0</span></div><div class="line" style="color:#4caf50"><span>PM Surya Ghar Subsidy</span><span id="cfgSubsidy">₹0</span></div><div class="line" style="font-weight:700;font-size:15px"><span>Effective Cost</span><span id="cfgEff">₹0</span></div><div class="line"><span>Capacity</span><span id="cfgCap">3.24 kW</span></div><div class="line"><span>Annual Gen</span><span id="cfgGen">4,860 units</span></div><div class="line"><span>Annual Savings @₹7</span><span id="cfgSave">₹0</span></div><div class="line"><span>CO₂ Offset</span><span id="cfgCO2">0</span></div><div class="line" style="color:var(--gold);font-weight:700"><span>📅 Install Date</span><span id="cfgDate">—</span></div><button class="btn btn-gold" onclick="addInstallToCart()">🛒 Add to Cart</button></div>
+</div>
+</div></section>
+
+<!-- ====== CART ====== -->
+<section class="section" id="cart"><div class="container">
+<h2>🛒 Your Cart</h2>
+<div id="cartItems"><p style="color:#999;text-align:center;padding:40px">Cart is empty.</p></div>
+<div id="cartSum" style="display:none;text-align:right;margin-top:12px;padding-top:12px;border-top:2px solid #eee">
+<p style="font-size:18px;font-weight:800">Total: <span id="cartTotal" style="color:var(--gold)">₹0</span></p>
+<button class="btn btn-gold" onclick="checkout()">Checkout (UPI) 💳</button>
+<button class="btn btn-white btn-sm" onclick="clearCart()">Clear</button>
+</div>
+</div></section>
+
+<!-- STICKY CART -->
+<div class="sticky-cart" id="stickyCart" style="display:none"><span>🛒 <span id="scCount">0</span> items</span><span class="total">₹<span id="scTotal">0</span></span><button class="btn btn-gold btn-sm" onclick="go('cart')">View Cart</button></div>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="productModal"><div class="modal" id="modalContent"></div></div>
 <!-- TOAST -->
-<div id="toastContainer"></div>
+<div id="tc"></div>
+<button class="scroll-top" onclick="scrollTo(0,0)">↑</button>
+<footer><div class="container">© 2026 SuryaClean · hello@suryaclean.in · Faridabad, Haryana</div></footer>
 
 <script>
+// ===== PRODUCT DATA =====
+const products=[
+{id:'sense',icon:'⚡',name:'Sense Energy Monitor',price:27999,badge:'best',badgeTxt:'Best Seller',specs:'Real-time solar + home tracking | ML device detection | WiFi | Free app',clist:'All inverter brands',features:'ML-powered device identification|Real-time & historical data|Solar net metering tracking|Monitors up to 200A service|WiFi 2.4GHz|Free iOS/Android app|Historical data export|Works worldwide',reviews:[{r:5,n:'Amit K., Faridabad',t:'Installed with my Tata solar system. Immediately spotted a 22% generation dip — turned out one panel was partially shaded. Paid for itself in 2 months.'},{r:5,n:'Priya S., Gurgaon',t:'Love the app interface. Shows exactly how much solar vs grid power I am using. The device detection is surprisingly accurate.'},{r:4,n:'Vikram R., Noida',t:'Great for tracking. Setup took about 20 min. Would give 5 stars if it supported 3-phase directly without extra clamps.'}]},
+{id:'emporia',icon:'🔌',name:'Emporia Vue Gen 3',price:18499,badge:'hot',badgeTxt:'Popular',specs:'16-circuit monitoring | Net metering | WiFi+BLE','All major inverters via CT clamps',features:'16 individual circuit sensors|Solar net metering monitoring|Real-time usage alerts|WiFi 2.4GHz + Bluetooth|Works with single & 3-phase|Cloud dashboard included|Data export to Excel|Supports time-of-use rates',reviews:[{r:5,n:'Rohit M., Delhi',t:'Best value for detailed monitoring. I track my AC, fridge, water pump, AND solar — all from one app. Installation was DIY-friendly.'},{r:4,n:'Sunita G., Faridabad',t:'The 16 sensors are more than I needed but the solar integration is perfect. Customer support is US-based but responsive over email.'}]},
+{id:'shelly',icon:'📊',name:'Shelly Pro 3EM',price:12999,badge:'new',badgeTxt:'Pro Grade',specs:'3-phase | DIN rail | MQTT/HA | WiFi+LAN','All inverters · 3-phase compatible',features:'3-phase professional monitoring|DIN rail mount (fits in breaker panel)|MQTT + Home Assistant native|WiFi + Ethernet LAN|Local API (no cloud dependency)|Real-time power quality data|Over-the-air firmware updates|Industrial-grade reliability',reviews:[{r:5,n:'Arun P., Chandigarh',t:'Perfect for my factory solar setup. 3-phase monitoring with individual phase data. Home Assistant integration was plug-and-play.'},{r:5,n:'Deepak S., IT Professional',t:'The best part — works without cloud. Local API means my data stays on my network. Pro-grade at consumer pricing.'}]},
+{id:'solaredge',icon:'📡',name:'SolarEdge Monitoring Kit',price:15999,badge:'new',badgeTxt:'OEM Grade',specs:'Per-panel monitoring | SolarEdge exclusive | Cloud','SolarEdge inverters only',features:'Per-panel level monitoring|Module-level power optimization|Cloud-based SolarEdge Monitoring|Fault detection & alerts|Revenue-grade meter|Ethernet + WiFi communication|25-year monitoring included|Remote troubleshooting',reviews:[{r:5,n:'Rajesh D., Noida',t:'If you have SolarEdge, this is mandatory. Per-panel data showed me one panel was underperforming — replaced under warranty.'},{r:4,n:'Manoj T., Faridabad',t:'Setup was done by installer. Dashboard shows everything you need. Only downside — locked to SolarEdge ecosystem.'}]},
+{id:'enphase',icon:'🛰️',name:'Enphase IQ Envoy',price:22999,badge:'best',badgeTxt:'Premium',specs:'Microinverter gateway | Enlighten cloud | Per-panel','Enphase microinverters only',features:'Gateway for Enphase microinverters|Per-panel production data|Enlighten cloud platform|Automatic system health alerts|WiFi + Ethernet connectivity|Consumption monitoring add-on|25-year data history|Mobile app notifications',reviews:[{r:5,n:'Kavita M., Gurgaon',t:'Enlighten app is best-in-class. Per-panel granular data, consumption tracking, and it alerts me before issues become problems.'},{r:5,n:'Sanjay K., Delhi',t:'Expensive but worth it for Enphase systems. The warranty integration means if a microinverter fails, Enphase already knows.'}]},
+{id:'gismo',icon:'🌐',name:'GismoPower IoT Monitor',price:9999,badge:'hot',badgeTxt:'🇮🇳 India Made',specs:'4G/SIM | No WiFi needed | SMS alerts | Made in India','All inverters · 4G connectivity',features:'Made in India (BIS certified)|4G/SIM card — works without WiFi|SMS alerts for low generation|Web dashboard included|Works in rural areas|Remote villages & farms|IP65 weatherproof casing|₹99/month SIM plan',reviews:[{r:5,n:'Ramesh J., Palwal',t:'Perfect for my farm. No WiFi needed — just insert a SIM card. I get SMS when generation drops. Made in India at this price is incredible.'},{r:4,n:'Om Prakash, Ballabgarh',t:'Simple and effective. Dashboard is basic compared to Emporia but for ₹10K with 4G, nothing else comes close.'}]}
+];
+
 // ===== STATE =====
-let cart = [];
-let currentPackage = '3kW';
+let cart=[], curPkg='3kW';
+const pkgs={ '2kW':{pq:4,pt:'loom-450',it:'growatt-3kw',bt:'none',mt:'gi'}, '3kW':{pq:6,pt:'tata-540',it:'growatt-5kw',bt:'luminous-2.5',mt:'gi'}, '5kW':{pq:10,pt:'waaree-545',it:'fronius-5kw',bt:'exide-3.5',mt:'aluminum'}, '10kW':{pq:20,pt:'vikram-540',it:'deye-hybrid-5kw',bt:'okaya-5',mt:'aluminum'} };
 
-// Package presets
-const packages = {
-  '2kW': { panels:4, panelType:'loom-450', inverter:'growatt-3kw', battery:'none', mount:'gi', panelWatt:450 },
-  '3kW': { panels:6, panelType:'tata-540', inverter:'growatt-5kw', battery:'luminous-2.5', mount:'gi', panelWatt:540 },
-  '5kW': { panels:10, panelType:'waaree-545', inverter:'fronius-5kw', battery:'exide-3.5', mount:'aluminum', panelWatt:545 },
-  '10kW':{ panels:20, panelType:'vikram-540', inverter:'deye-hybrid-5kw', battery:'okaya-5', mount:'aluminum', panelWatt:540 },
-};
+// ===== RENDER PRODUCTS =====
+document.getElementById('productGrid').innerHTML=products.map(p=>`
+<div class="card product-card" onclick="openProduct('${p.id}')">
+<span class="icon">${p.icon}</span>
+<span class="badge badge-${p.badge}">${p.badgeTxt}</span>
+<h4>${p.name}</h4>
+<p class="specs">${p.specs}</p>
+<div class="price-sm">₹${p.price.toLocaleString()}</div>
+<p class="tag">Click for details →</p>
+</div>
+`).join('');
 
-function selectPackage(pkg) {
-  currentPackage = pkg;
-  document.querySelectorAll('.package-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('pkg-'+pkg).classList.add('selected');
-  const p = packages[pkg];
-  document.getElementById('panelSelect').value = p.panelType;
-  document.getElementById('inverterSelect').value = p.inverter;
-  document.getElementById('batterySelect').value = p.battery;
-  document.getElementById('mountSelect').value = p.mount;
-  document.getElementById('panelQty').textContent = p.panels;
-  updateConfig();
+// ===== PRODUCT MODAL =====
+function openProduct(id){
+const p=products.find(px=>px.id===id);
+if(!p)return;
+document.getElementById('modalContent').innerHTML=`
+<span class="close" onclick="closeModal()">✕</span>
+<div style="font-size:64px;text-align:center">${p.icon}</div>
+<span class="badge badge-${p.badge}">${p.badgeTxt}</span>
+<h3>${p.name}</h3>
+<div class="price-tag" style="font-size:26px">₹${p.price.toLocaleString()}</div>
+<p style="font-size:12px;color:#888;margin:4px 0">Compatible with: ${p.clist}</p>
+<div class="gallery">${[...Array(3)].map((_,i)=>`<div>${['📸','📊','📱'][i]}</div>`).join('')}</div>
+<h4 style="margin:8px 0 4px">📋 Specifications</h4>
+<table>${p.features.split('|').map(f=>`<tr><td>•</td><td>${f}</td></tr>`).join('')}</table>
+<h4 style="margin:8px 0 4px">⭐ Reviews (${p.reviews.length})</h4>
+<div class="reviews">${p.reviews.map(r=>`<div class="review"><div class="stars">${'★'.repeat(r.r)}${'☆'.repeat(5-r.r)}</div><strong>${r.n}</strong><br>${r.t}</div>`).join('')}</div>
+<button class="btn btn-gold" onclick="addToCart('${p.id}','${p.name}','₹${p.price.toLocaleString()}',${p.price},'${p.icon}');closeModal();" style="width:100%;margin-top:8px">🛒 Add to Cart — ₹${p.price.toLocaleString()}</button>`;
+document.getElementById('productModal').classList.remove('hidden');
+}
+function closeModal(){document.getElementById('productModal').classList.add('hidden')}
+document.getElementById('productModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+// ===== BOOKING =====
+let bookPrice=899;
+function quickBook(size,price){
+bookPrice=price;
+document.getElementById('bookingForm').classList.remove('hidden');
+document.getElementById('bookTitle').textContent=size+' — ₹'+price;
+document.getElementById('bookTotal').textContent=price;
+document.getElementById('bookingForm').scrollIntoView({behavior:'smooth'});
+}
+function confirmBooking(){
+const addr=document.getElementById('bookAddr').value.trim();
+const date=document.getElementById('bookDate').value;
+if(!addr||!date){toast('Please enter address and date');return;}
+const id='clean-'+Date.now().toString(36);
+cart.push({id,name:'Solar Panel Cleaning — '+document.getElementById('bookTitle').textContent,displayPrice:'₹'+bookPrice,price:bookPrice,icon:'🧹',qty:1,type:'cleaning',details:{address:addr,date:date,time:document.getElementById('bookTime').value,notes:document.getElementById('bookNotes').value}});
+renderCart();
+toast('Cleaning added to cart ✅');
+document.getElementById('bookingForm').classList.add('hidden');
+document.getElementById('bookAddr').value='';document.getElementById('bookDate').value='';
 }
 
-// ===== CONFIGURATOR LOGIC =====
-function changePanelQty(delta) {
-  const el = document.getElementById('panelQty');
-  let v = parseInt(el.textContent) + delta;
-  if (v < 1) v = 1;
-  if (v > 100) v = 100;
-  el.textContent = v;
-  updateConfig();
+// ===== CART =====
+function addToCart(id,name,dp,price,icon){
+const ex=cart.find(c=>c.id===id);
+if(ex){ex.qty++}else{cart.push({id,name,displayPrice:dp,price,icon,qty:1,type:'product'})}
+renderCart();toast(name+' added ✅');
+}
+function removeFromCart(id){cart=cart.filter(c=>c.id!==id);renderCart()}
+function updateCartQty(id,d){const it=cart.find(c=>c.id===id);if(!it)return;it.qty+=d;if(it.qty<=0)cart=cart.filter(c=>c.id!==id);renderCart()}
+function clearCart(){cart=[];renderCart();toast('Cart cleared')}
+function renderCart(){
+const cI=document.getElementById('cartItems'),cS=document.getElementById('cartSum'),st=document.getElementById('stickyCart');
+const tI=cart.reduce((s,c)=>s+c.qty,0),tP=cart.reduce((s,c)=>s+c.price*c.qty,0);
+document.getElementById('cartCntNav').textContent=tI;
+document.getElementById('scCount').textContent=tI;document.getElementById('scTotal').textContent=tP.toLocaleString();
+document.getElementById('cartTotal').textContent='₹'+tP.toLocaleString();
+if(cart.length===0){cI.innerHTML='<p style="color:#999;text-align:center;padding:40px">Cart is empty.</p>';cS.style.display='none';st.style.display='none'}
+else{cI.innerHTML=cart.map(c=>`<div class="cart-item"><div style="font-size:28px">${c.icon}</div><div class="info"><h4>${c.name}</h4><p>${c.displayPrice} each ${c.type==='cleaning'&&c.details?'· '+c.details.date+' at '+c.details.time:''}${c.type==='installation'&&c.details?'· Install by '+c.details.installDate:''}</p></div><div class="qty-ctrl"><button onclick="updateCartQty('${c.id}',-1)">-</button><span>${c.qty}</span><button onclick="updateCartQty('${c.id}',1)">+</button></div><strong>₹${(c.price*c.qty).toLocaleString()}</strong><button onclick="removeFromCart('${c.id}')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:16px">✕</button></div>`).join('');cS.style.display='block';st.style.display='flex'}
+}
+function addInstallToCart(){
+const po=document.getElementById('psel').selectedOptions[0],io=document.getElementById('isel').selectedOptions[0],bo=document.getElementById('bsel').selectedOptions[0];
+const pw=parseInt(po.dataset.w),pq=parseInt(document.getElementById('pQty').textContent),skw=(pq*pw)/1000;
+const tp=document.getElementById('cfgTotal').textContent.replace('₹','').replace(/,/g,''),tpn=parseInt(tp)||0;
+const id='inst-'+Date.now().toString(36);
+cart.push({id,name:`Solar Install — ${skw.toFixed(2)}kW (${po.dataset.b} ${pw}W×${pq} + ${io.dataset.b} Inv)`,displayPrice:'₹'+tpn.toLocaleString(),price:tpn,icon:'🔧',qty:1,type:'installation',details:{installDate:document.getElementById('cfgDate').textContent}});
+renderCart();toast('Installation added to cart 🎉');go('cart');
+}
+function checkout(){const tP=cart.reduce((s,c)=>s+c.price*c.qty,0);if(tP===0){toast('Cart empty!');return}toast('🧪 Demo: Would open Razorpay for ₹'+tP.toLocaleString()+' via UPI\n(Real checkout needs live Razorpay keys)','success')}
+
+// ===== INSTALL CONFIG =====
+function selPkg(p){document.querySelectorAll('.package-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('pkg-'+p).classList.add('selected');const pk=pkgs[p];document.getElementById('psel').value=pk.pt;document.getElementById('isel').value=pk.it;document.getElementById('bsel').value=pk.bt;document.getElementById('msel').value=pk.mt;document.getElementById('pQty').textContent=pk.pq;uc()}
+function chgPQ(d){const e=document.getElementById('pQty');let v=parseInt(e.textContent)+d;if(v<1)v=1;e.textContent=v;uc()}
+function uc(){
+const po=document.getElementById('psel').selectedOptions[0],io=document.getElementById('isel').selectedOptions[0],bo=document.getElementById('bsel').selectedOptions[0],mo=document.getElementById('msel').selectedOptions[0];
+const pp=parseInt(po.dataset.p),pw=parseInt(po.dataset.w),pb=po.dataset.b,pq=parseInt(document.getElementById('pQty').textContent);
+const ip=parseInt(io.dataset.p),iw=parseInt(io.dataset.w),ib=io.dataset.b;
+const bp=parseInt(bo.dataset.p),bn=bo.textContent;
+const mpk=parseInt(mo.dataset.p);
+const skw=(pq*pw)/1000;const mpr=Math.round(mpk*skw);
+const bos=[{id:'bos1',p:8500,n:'DC Cables'},{id:'bos2',p:12000,n:'AC Cables + MCB'},{id:'bos3',p:5500,n:'Earthing Kit'},{id:'bos4',p:8000,n:'Net Meter'},{id:'bos5',p:4500,n:'Lightning Arrestor'},{id:'bos6',p:6000,n:'Bird Mesh'},{id:'bos7',p:5500,n:'Remote Monitor'}];
+let bt=0;bos.forEach(b=>{if(document.getElementById(b.id).checked)bt+=b.p});
+const lab=Math.round(skw*8000),tot=pp*pq+ip+bp+mpr+bt+lab;
+const sub=skw<=3?Math.min(skw*30000,78000):skw<=5?78000:0,eff=tot-sub;
+const ag=Math.round(skw*1500),as=Math.round(ag*7),co=(skw*1.2).toFixed(1);
+const td=new Date();td.setDate(td.getDate()+(skw<=3?14:skw<=5?21:30));
+document.getElementById('pInfo').textContent=`${pq}×${pw}W=${skw.toFixed(2)}kW`;
+document.getElementById('cfgDet').innerHTML=`<div class="line"><span>${pb} ${pw}W × ${pq}</span><span>₹${(pp*pq).toLocaleString()}</span></div><div class="line"><span>${ib} ${(iw/1000).toFixed(1)}kW</span><span>₹${ip.toLocaleString()}</span></div>${bp>0?`<div class="line"><span>${bn}</span><span>₹${bp.toLocaleString()}</span></div>`:''}<div class="line"><span>Mounting</span><span>₹${mpr.toLocaleString()}</span></div>${bos.filter(b=>document.getElementById(b.id).checked).map(b=>`<div class="line"><span>${b.n}</span><span>₹${b.p.toLocaleString()}</span></div>`).join('')}<div class="line"><span>Installation</span><span>₹${lab.toLocaleString()}</span></div>`;
+document.getElementById('cfgTotal').textContent='₹'+tot.toLocaleString();
+document.getElementById('cfgSubsidy').textContent=sub>0?'−₹'+sub.toLocaleString():'Not applicable';
+document.getElementById('cfgEff').textContent='₹'+Math.max(0,eff).toLocaleString();
+document.getElementById('cfgCap').textContent=skw.toFixed(2)+' kW';
+document.getElementById('cfgGen').textContent=ag.toLocaleString()+' units';
+document.getElementById('cfgSave').textContent='₹'+as.toLocaleString();
+document.getElementById('cfgCO2').textContent=co+' tons/yr';
+document.getElementById('cfgDate').textContent=td.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
 }
 
-function updateConfig() {
-  const panelOpt = document.getElementById('panelSelect').selectedOptions[0];
-  const invOpt = document.getElementById('inverterSelect').selectedOptions[0];
-  const batOpt = document.getElementById('batterySelect').selectedOptions[0];
-  const mountOpt = document.getElementById('mountSelect').selectedOptions[0];
-
-  const panelPrice = parseInt(panelOpt.dataset.price) || 0;
-  const panelWatt = parseInt(panelOpt.dataset.watts) || 0;
-  const panelBrand = panelOpt.dataset.brand || '';
-  const panelQty = parseInt(document.getElementById('panelQty').textContent);
-  const invPrice = parseInt(invOpt.dataset.price) || 0;
-  const invWatt = parseInt(invOpt.dataset.watts) || 0;
-  const invBrand = invOpt.dataset.brand || '';
-  const batPrice = parseInt(batOpt.dataset.price) || 0;
-  const batWH = parseInt(batOpt.dataset.wh) || 0;
-  const batName = batOpt.textContent;
-  const mountPricePerKW = parseInt(mountOpt.dataset.price) || 0;
-
-  const totalPanelWatt = panelQty * panelWatt;
-  const systemKW = totalPanelWatt / 1000;
-  const mountPrice = Math.round(mountPricePerKW * systemKW);
-
-  // BOS
-  const bosItems = [
-    { id:'dcCables', price:8500, name:'DC Cables' },
-    { id:'acCables', price:12000, name:'AC Cables + MCB/SPD' },
-    { id:'earthing', price:5500, name:'Earthing Kit' },
-    { id:'netMeter', price:8000, name:'Net Meter' },
-    { id:'lightningArrestor', price:4500, name:'Lightning Arrestor' },
-    { id:'birdMeshKit', price:6000, name:'Bird Mesh Kit' },
-    { id:'remoteMonitor', price:5500, name:'Remote Monitor' },
-  ];
-  let bosTotal = 0;
-  bosItems.forEach(b => { if (document.getElementById(b.id).checked) bosTotal += b.price; });
-
-  const installationLabor = Math.round(systemKW * 8000);
-  const total = panelPrice * panelQty + invPrice + batPrice + mountPrice + bosTotal + installationLabor;
-  const subsidy = systemKW <= 3 ? Math.min(systemKW * 30000, 78000) : systemKW <= 5 ? 78000 : 0;
-  const effective = total - subsidy;
-
-  // Annual estimates
-  const annualGen = Math.round(systemKW * 1500);
-  const annualSavings = Math.round(annualGen * 7);
-  const co2 = (systemKW * 1.2).toFixed(1);
-
-  // Install date estimate
-  const today = new Date();
-  const leadDays = systemKW <= 3 ? 14 : systemKW <= 5 ? 21 : 30;
-  const installDate = new Date(today);
-  installDate.setDate(installDate.getDate() + leadDays);
-  const installDateStr = installDate.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
-
-  // Update panel total info
-  document.getElementById('panelTotalInfo').textContent = `${panelQty} × ${panelWatt}W = ${systemKW.toFixed(2)} kW`;
-
-  // Update summary
-  document.getElementById('configDetails').innerHTML = `
-    <div class="line"><span>${panelBrand} ${panelWatt}W × ${panelQty}</span><span>₹${(panelPrice*panelQty).toLocaleString()}</span></div>
-    <div class="line"><span>${invBrand} ${(invWatt/1000).toFixed(1)}kW Inverter</span><span>₹${invPrice.toLocaleString()}</span></div>
-    ${batPrice > 0 ? `<div class="line"><span>${batName}</span><span>₹${batPrice.toLocaleString()}</span></div>` : ''}
-    <div class="line"><span>Mounting Structure (${mountOpt.textContent.match(/\(.*?\)/)?.[0] || ''})</span><span>₹${mountPrice.toLocaleString()}</span></div>
-    ${bosItems.filter(b=>document.getElementById(b.id).checked).map(b=>`<div class="line"><span>${b.name}</span><span>₹${b.price.toLocaleString()}</span></div>`).join('')}
-    <div class="line"><span>Installation & Commissioning</span><span>₹${installationLabor.toLocaleString()}</span></div>
-  `;
-
-  document.getElementById('totalPrice').textContent = '₹' + total.toLocaleString();
-  document.getElementById('subsidyAmt').textContent = subsidy > 0 ? '−₹' + subsidy.toLocaleString() : 'Not applicable';
-  document.getElementById('effectiveCost').textContent = '₹' + Math.max(0, effective).toLocaleString();
-  document.getElementById('totalCapacity').textContent = systemKW.toFixed(2) + ' kW';
-  document.getElementById('annualGen').textContent = annualGen.toLocaleString() + ' units';
-  document.getElementById('annualSavings').textContent = '₹' + annualSavings.toLocaleString();
-  document.getElementById('co2offset').textContent = co2 + ' tons/year';
-  document.getElementById('installDate').textContent = installDateStr;
-}
-
-// ===== CART LOGIC =====
-function addToCart(id, name, displayPrice, priceNum, icon) {
-  const existing = cart.find(c => c.id === id);
-  if (existing) { existing.qty++; }
-  else { cart.push({ id, name, displayPrice, price: priceNum, icon, qty: 1, type: 'product' }); }
-  renderCart();
-  showToast(`${name} added to cart ✅`);
-}
-
-function addInstallationToCart() {
-  const panelOpt = document.getElementById('panelSelect').selectedOptions[0];
-  const invOpt = document.getElementById('inverterSelect').selectedOptions[0];
-  const batOpt = document.getElementById('batterySelect').selectedOptions[0];
-  const panelWatt = parseInt(panelOpt.dataset.watts) || 0;
-  const panelQty = parseInt(document.getElementById('panelQty').textContent);
-  const systemKW = (panelQty * panelWatt) / 1000;
-  const totalStr = document.getElementById('totalPrice').textContent.replace('₹','').replace(/,/g,'');
-  const totalPrice = parseInt(totalStr) || 0;
-
-  const id = 'install-' + Date.now();
-  cart.push({
-    id,
-    name: `Solar Installation — ${systemKW.toFixed(2)} kW (${panelOpt.dataset.brand} ${panelWatt}W × ${panelQty} + ${invOpt.dataset.brand} Inverter)`,
-    displayPrice: '₹' + totalPrice.toLocaleString(),
-    price: totalPrice,
-    icon: '🔧',
-    qty: 1,
-    type: 'installation',
-    details: { systemKW, panelBrand: panelOpt.dataset.brand, panelWatt, panelQty, invBrand: invOpt.dataset.brand, batName: batOpt.textContent, installDate: document.getElementById('installDate').textContent }
-  });
-  renderCart();
-  showToast('Installation added to cart! 🎉');
-  scrollToSection('cart-section');
-}
-
-function removeFromCart(id) {
-  cart = cart.filter(c => c.id !== id);
-  renderCart();
-}
-
-function updateCartQty(id, delta) {
-  const item = cart.find(c => c.id === id);
-  if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) { cart = cart.filter(c => c.id !== id); }
-  renderCart();
-}
-
-function clearCart() {
-  cart = [];
-  renderCart();
-  showToast('Cart cleared');
-}
-
-function renderCart() {
-  const container = document.getElementById('cartItems');
-  const summary = document.getElementById('cartSummary');
-  const sticky = document.getElementById('stickyCart');
-  const countNav = document.getElementById('cartCountNav');
-  const totalItems = cart.reduce((sum, c) => sum + c.qty, 0);
-  const totalPrice = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-
-  countNav.textContent = totalItems;
-  document.getElementById('stickyCount').textContent = totalItems;
-  document.getElementById('stickyTotal').textContent = totalPrice.toLocaleString();
-  document.getElementById('cartTotal').textContent = '₹' + totalPrice.toLocaleString();
-
-  if (cart.length === 0) {
-    container.innerHTML = '<p style="color:#999;text-align:center;padding:40px">Your cart is empty.</p>';
-    summary.style.display = 'none';
-    sticky.style.display = 'none';
-  } else {
-    container.innerHTML = cart.map(c => `
-      <div class="cart-item">
-        <div style="font-size:32px">${c.icon}</div>
-        <div class="info">
-          <h4>${c.name}</h4>
-          <p>${c.displayPrice} each ${c.type === 'installation' ? '· Est. install: ' + (c.details?.installDate || '') : ''}</p>
-        </div>
-        <div class="qty-ctrl">
-          <button onclick="updateCartQty('${c.id}',-1)">−</button>
-          <span>${c.qty}</span>
-          <button onclick="updateCartQty('${c.id}',1)">+</button>
-        </div>
-        <strong style="min-width:60px;text-align:right">₹${(c.price*c.qty).toLocaleString()}</strong>
-        <button onclick="removeFromCart('${c.id}')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:18px">✕</button>
-      </div>
-    `).join('');
-    summary.style.display = 'block';
-    sticky.style.display = 'flex';
-  }
-}
-
-function checkout() {
-  const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-  if (total === 0) { showToast('Cart is empty!'); return; }
-  showToast(`🧪 Demo: Would open Razorpay for ₹${total.toLocaleString()} via UPI\n(Real checkout requires live Razorpay keys)`);
-}
-
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
-}
-
-function showToast(msg) {
-  const el = document.createElement('div');
-  el.className = 'toast success';
-  el.textContent = msg;
-  document.getElementById('toastContainer').appendChild(el);
-  setTimeout(() => el.remove(), 3000);
-}
+// ===== UTILS =====
+function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
+function toast(msg){const e=document.createElement('div');e.className='toast success';e.textContent=msg;document.getElementById('tc').appendChild(e);setTimeout(()=>e.remove(),3000)}
+window.addEventListener('scroll',()=>{document.querySelector('.scroll-top').style.display=window.scrollY>500?'flex':'none'});
 
 // INIT
-updateConfig();
-renderCart();
+uc();renderCart();
 </script>
 </body>
 </html>
