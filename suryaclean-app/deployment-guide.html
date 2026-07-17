@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 SuryaClean — Deployment Guide</title>
+<style>
+:root { --gold: #F5A623; --blue: #4A90D9; --navy: #1B2A4A; --green: #27AE60; --red: #e74c3c; --purple: #8e44ad; --teal: #16a085; --grey-bg: #f8f9fa; --card-shadow: 0 2px 12px rgba(0,0,0,0.06); --radius: 14px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.7; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* HEADER */
+.header { background: linear-gradient(135deg, var(--navy) 0%, #16213e 50%, #0f3460 100%); padding: 60px 0 40px; color: white; text-align: center; position: relative; overflow: hidden; }
+.header::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 70%, rgba(245,166,35,0.15) 0%, transparent 60%); pointer-events: none; }
+.header h1 { font-size: 42px; font-weight: 800; margin-bottom: 8px; position: relative; z-index: 1; }
+.header h1 span { color: var(--gold); }
+.header .subtitle { font-size: 18px; opacity: 0.85; max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+.header .meta { display: flex; gap: 20px; justify-content: center; margin-top: 20px; flex-wrap: wrap; position: relative; z-index: 1; }
+.header .meta .pill { background: rgba(255,255,255,0.12); padding: 8px 18px; border-radius: 30px; font-size: 13px; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(5px); }
+
+/* PROGRESS */
+.progress-section { background: white; padding: 28px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.progress-steps { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.progress-step { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: #999; flex: 1; min-width: 80px; cursor: pointer; transition: all 0.2s; }
+.progress-step .circle { width: 36px; height: 36px; border-radius: 50%; background: #e8e8e8; color: #999; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; transition: all 0.3s; }
+.progress-step:hover .circle { transform: scale(1.1); }
+.progress-step.active .circle { background: var(--gold); color: white; box-shadow: 0 4px 12px rgba(245,166,35,0.3); }
+.progress-step.done .circle { background: var(--green); color: white; }
+.progress-step.done .circle::after { content: ' ✓'; }
+.progress-line { flex: 0.5; min-width: 20px; height: 2px; background: #e0e0e0; margin: 0 -4px; }
+
+/* MAIN */
+.main { padding: 40px 0 80px; }
+.step-section { background: white; border-radius: var(--radius); margin-bottom: 28px; box-shadow: var(--card-shadow); border: 1px solid #eee; overflow: hidden; transition: all 0.2s; }
+.step-section:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.step-header { padding: 22px 28px; display: flex; align-items: center; gap: 16px; cursor: pointer; user-select: none; transition: background 0.2s; }
+.step-header:hover { background: #fafafa; }
+.step-number { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
+.step-number.firebase { background: #e3f0ff; color: #1a73e8; }
+.step-number.razorpay { background: #e8f5e9; color: #2e7d32; }
+.step-number.render { background: #fce4ec; color: #c62828; }
+.step-number.vercel { background: #e8eaf6; color: #283593; }
+.step-number.playstore { background: #fff3e0; color: #e65100; }
+.step-number.test { background: #e0f2f1; color: #00695c; }
+.step-number.domain { background: #f3e5f5; color: #6a1b9a; }
+.step-info { flex: 1; }
+.step-info h3 { font-size: 19px; font-weight: 700; margin-bottom: 2px; }
+.step-info .step-meta { font-size: 13px; color: #888; display: flex; gap: 16px; flex-wrap: wrap; }
+.step-info .step-meta span { display: flex; align-items: center; gap: 4px; }
+.step-toggle { font-size: 20px; color: #bbb; transition: transform 0.3s; }
+.step-header.open .step-toggle { transform: rotate(180deg); }
+.step-body { padding: 0 28px 28px; display: none; }
+.step-body.open { display: block; }
+.step-body p { margin-bottom: 14px; color: #444; font-size: 14px; }
+.step-body ol, .step-body ul { margin: 8px 0 16px 20px; color: #555; font-size: 14px; }
+.step-body li { margin-bottom: 8px; }
+.step-body strong { color: var(--navy); }
+
+/* CARDS */
+.card { background: var(--grey-bg); border-radius: 10px; padding: 20px; margin: 16px 0; border-left: 4px solid var(--gold); }
+.card.warning { border-left-color: #ff9800; background: #fff8e1; }
+.card.info { border-left-color: var(--blue); background: #e3f2fd; }
+.card.success { border-left-color: var(--green); background: #e8f5e9; }
+.card.danger { border-left-color: var(--red); background: #fbe9e7; }
+.card h4 { font-size: 15px; margin-bottom: 6px; }
+.card p, .card li { font-size: 13px; color: #555; }
+.card pre { background: #263238; color: #aed581; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 12px; line-height: 1.5; margin-top: 10px; }
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+th { background: var(--navy); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+tr:hover td { background: #f5f8ff; }
+
+/* CHECKLIST */
+.checklist { list-style: none; margin-left: 0 !important; }
+.checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+.checklist li:last-child { border-bottom: none; }
+.checklist .check { width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; transition: all 0.2s; }
+.checklist .check.checked { background: var(--green); border-color: var(--green); color: white; font-size: 13px; }
+.checklist .check.checked::after { content: '✓'; }
+
+/* TAGS */
+.tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+.tag-free { background: #e8f5e9; color: #2e7d32; }
+.tag-paid { background: #fff3e0; color: #e65100; }
+.tag-time { color: #666; font-weight: 400; }
+
+/* ENV COPY */
+.env-block { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 10px; font-family: 'Fira Code', 'Consolas', monospace; font-size: 12px; line-height: 1.8; overflow-x: auto; position: relative; }
+.env-block .copy-btn { position: absolute; top: 12px; right: 12px; background: var(--gold); border: none; color: white; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+.env-block .comment { color: #6a9955; }
+.env-block .key { color: #9cdcfe; }
+.env-block .value { color: #ce9178; }
+
+/* COST SUMMARY */
+.cost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.cost-card { background: white; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #eee; }
+.cost-card .amount { font-size: 28px; font-weight: 800; color: var(--gold); }
+.cost-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+.cost-total { background: linear-gradient(135deg, var(--navy), #0f3460); color: white; }
+.cost-total .amount { color: white; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before { content: ''; position: absolute; left: 12px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--green)); }
+.timeline-item { position: relative; margin-bottom: 24px; }
+.timeline-item::before { content: ''; position: absolute; left: -24px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid white; box-shadow: 0 0 0 2px var(--gold); }
+.timeline-item .date { font-size: 12px; color: var(--gold); font-weight: 700; }
+.timeline-item .desc { font-size: 14px; color: #555; }
+
+/* SCROLL TO TOP */
+.scroll-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: white; border: none; cursor: pointer; font-size: 20px; box-shadow: 0 4px 12px rgba(245,166,35,0.3); display: none; z-index: 99; }
+.scroll-top.visible { display: flex; align-items: center; justify-content: center; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) { .header h1 { font-size: 28px; } .step-header { padding: 16px; } .step-body { padding: 0 16px 20px; } .progress-steps { justify-content: center; } .progress-line { display: none; } }
+
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="header">
+  <div class="container">
+    <h1>☀️ <span>SuryaClean</span> Deployment Guide</h1>
+    <p class="subtitle">Take your solar panel cleaning platform LIVE — website, backend, Android app, UPI payments, and Google login. Click each step to expand.</p>
+    <div class="meta">
+      <span class="pill">⏱ ~5-7 Days</span>
+      <span class="pill">💰 ~₹2,300 Total</span>
+      <span class="pill">🆓 Firebase + Vercel + Render — Free</span>
+    </div>
+  </div>
+</header>
+
+<!-- ====== PROGRESS ====== -->
+<div class="progress-section"><div class="container">
+  <div class="progress-steps" id="progressSteps">
+    <div class="progress-step active" data-step="0"><div class="circle">1</div>Domain</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="1"><div class="circle">2</div>Firebase</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="2"><div class="circle">3</div>Razorpay</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="3"><div class="circle">4</div>Backend</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="4"><div class="circle">5</div>Website</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="5"><div class="circle">6</div>Domain DNS</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="6"><div class="circle">7</div>Play Store</div>
+    <div class="progress-line"></div>
+    <div class="progress-step" data-step="7"><div class="circle">8</div>Test ✅</div>
+  </div>
+</div></div>
+
+<!-- ====== MAIN CONTENT ====== -->
+<div class="main"><div class="container" id="guideContent">
+
+<!-- STEP 0: DOMAIN -->
+<div class="step-section" data-step="0">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number domain">🌐</div>
+    <div class="step-info">
+      <h3>Step 1: Buy Domain & Setup Email</h3>
+      <div class="step-meta"><span>⏱ 10 min</span><span class="tag tag-paid">₹800/yr</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p><strong>Buy your domain first</strong> — this is your brand's home on the internet. Everything else connects to it.</p>
+
+    <div class="card">
+      <h4>📍 Where to Buy</h4>
+      <table>
+        <tr><th>Registrar</th><th>Price (.in)</th><th>Why Choose</th></tr>
+        <tr><td><strong>Namecheap</strong></td><td>~₹599/yr</td><td>Free WHOIS privacy, great UI, easy DNS</td></tr>
+        <tr><td><strong>GoDaddy India</strong></td><td>~₹799/yr</td><td>UPI payment, Hindi support, 24/7 phone</td></tr>
+        <tr><td><strong>BigRock</strong></td><td>~₹499/yr</td><td>Indian company, cheapest .in pricing</td></tr>
+      </table>
+    </div>
+
+    <ol>
+      <li>Go to <strong>namecheap.com</strong> (or GoDaddy)</li>
+      <li>Search: <strong>suryaclean.in</strong></li>
+      <li>If available → Buy it. <strong>Also buy:</strong> <code>suryaclean.com</code> and <code>suryaclean.co.in</code> to prevent copycats</li>
+      <li>Enable <strong>auto-renewal</strong> so it never expires</li>
+    </ol>
+
+    <div class="card info">
+      <h4>📧 Setup Professional Email (FREE)</h4>
+      <p><strong>Zoho Mail</strong> gives you <strong>5 free business emails</strong> with your domain. <code>hello@suryaclean.in</code> looks 100x more professional than a Gmail address.</p>
+      <ol>
+        <li>Go to <a href="https://zoho.com/mail" target="_blank">zoho.com/mail</a> → "Business Email" → Free plan</li>
+        <li>Add your domain → Follow their step-by-step setup wizard</li>
+        <li>Create: <code>hello@</code>, <code>support@</code>, <code>jobs@</code> suryaclean.in</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 1: FIREBASE -->
+<div class="step-section" data-step="1">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number firebase">🔥</div>
+    <div class="step-info">
+      <h3>Step 2: Setup Firebase (Google Login + Database)</h3>
+      <div class="step-meta"><span>⏱ 15 min</span><span class="tag tag-free">Free</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>Firebase is Google's backend platform. It gives you <strong>Google Sign-In</strong> for users and <strong>Firestore</strong> to store bookings, AMCs, and payments.</p>
+
+    <div class="card success">
+      <h4>📋 What You'll Get From This Step</h4>
+      <ul>
+        <li>A <code>firebaseConfig</code> object → goes into website environment variables</li>
+        <li>An Admin SDK <strong>private key JSON</strong> → goes into backend environment variables</li>
+        <li>A <code>google-services.json</code> → goes into Flutter Android app</li>
+        <li>A <code>GoogleService-Info.plist</code> → goes into Flutter iOS app</li>
+      </ul>
+    </div>
+
+    <h4>3.1 Create Firebase Project</h4>
+    <ol>
+      <li>Go to <a href="https://console.firebase.google.com" target="_blank"><strong>console.firebase.google.com</strong></a></li>
+      <li>Click <strong>"Add Project"</strong> → Name: <code>suryaclean</code></li>
+      <li>Enable Google Analytics (recommended — free)</li>
+      <li>Select your Google account → <strong>Create Project</strong></li>
+    </ol>
+
+    <h4>3.2 Enable Google Sign-In</h4>
+    <ol>
+      <li>Left sidebar → <strong>Build</strong> → <strong>Authentication</strong> → "Get Started"</li>
+      <li><strong>Sign-in method</strong> tab → Click <strong>Google</strong></li>
+      <li>Toggle <strong>Enable</strong> → Select your support email → <strong>Save</strong></li>
+    </ol>
+
+    <h4>3.3 Enable Firestore Database</h4>
+    <ol>
+      <li>Left sidebar → <strong>Build</strong> → <strong>Firestore Database</strong> → "Create Database"</li>
+      <li>Choose <strong>"Start in test mode"</strong></li>
+      <li>Location: <strong>asia-south1 (Mumbai)</strong> — closest to Faridabad!</li>
+    </ol>
+
+    <h4>3.4 Register Web App (for Website)</h4>
+    <ol>
+      <li>Project Overview → Click the <strong>Web icon</strong> <code></></code></li>
+      <li>Nickname: <code>SuryaClean Web</code> → Register</li>
+      <li><strong>COPY the firebaseConfig object</strong> — save it for Step 5!</li>
+    </ol>
+
+    <h4>3.5 Register Android App (for Flutter)</h4>
+    <ol>
+      <li>Project Overview → Click the <strong>Android icon</strong> 🤖</li>
+      <li>Package name: <code>com.suryaclean.app</code></li>
+      <li>Download <code>google-services.json</code> — save to <code>mobile/android/app/</code></li>
+    </ol>
+
+    <h4>3.6 Generate Admin SDK Key (for Backend)</h4>
+    <div class="card danger">
+      <h4>⚠️ Keep This File SECRET — Never Upload to GitHub</h4>
+    </div>
+    <ol>
+      <li>Project Settings → <strong>Service accounts</strong> tab</li>
+      <li>Click <strong>"Generate new private key"</strong></li>
+      <li>Download the JSON file — it contains your <code>client_email</code> and <code>private_key</code></li>
+    </ol>
+  </div>
+</div>
+
+<!-- STEP 2: RAZORPAY -->
+<div class="step-section" data-step="2">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number razorpay">💳</div>
+    <div class="step-info">
+      <h3>Step 3: Setup Razorpay (UPI Payments)</h3>
+      <div class="step-meta"><span>⏱ 3-5 business days (KYC)</span><span class="tag tag-free">Free to sign up</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>Razorpay handles all payments — UPI (GPay, PhonePe), cards, and netbanking. <strong>UPI payments are 0% fee!</strong></p>
+
+    <h4>Sign Up & Verify</h4>
+    <ol>
+      <li>Go to <a href="https://dashboard.razorpay.com" target="_blank"><strong>dashboard.razorpay.com</strong></a></li>
+      <li>Sign up with <code>hello@suryaclean.in</code></li>
+      <li>Business: <strong>SuryaClean</strong> | Type: <strong>Service</strong> | Category: <strong>Cleaning Services</strong></li>
+      <li>Submit KYC documents: PAN Card, Aadhaar, Bank account, Canceled cheque</li>
+      <li>Wait 3-5 business days for verification → your account switches to <strong>Live Mode</strong></li>
+    </ol>
+
+    <h4>Get Your Keys</h4>
+    <ol>
+      <li>Dashboard → <strong>Settings</strong> → <strong>API Keys</strong></li>
+      <li><strong>Key ID</strong> (public, starts with <code>rzp_live_</code>) → goes into website + app</li>
+      <li><strong>Key Secret</strong> (PRIVATE!) → goes into backend ONLY</li>
+    </ol>
+
+    <div class="card danger">
+      <h4>⚠️ CRITICAL: Key Secret NEVER Goes in Frontend Code</h4>
+      <p>Key ID = public (okay in website/app). Key Secret = private (backend only). If the secret leaks, anyone can refund your payments.</p>
+    </div>
+
+    <div class="card info">
+      <h4>💰 Razorpay Pricing</h4>
+      <table>
+        <tr><th>Payment Method</th><th>Fee</th><th>Settlement</th></tr>
+        <tr><td>UPI (GPay, PhonePe)</td><td><strong>0%</strong> 🎉</td><td>T+2 days</td></tr>
+        <tr><td>Cards, Netbanking</td><td>2% per transaction</td><td>T+2 days</td></tr>
+        <tr><td>Wallets</td><td>2%</td><td>T+2 days</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: BACKEND -->
+<div class="step-section" data-step="3">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number render">⚙️</div>
+    <div class="step-info">
+      <h3>Step 4: Deploy Backend API (Render)</h3>
+      <div class="step-meta"><span>⏱ 15 min</span><span class="tag tag-free">Free</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>The backend handles all business logic — creating bookings, processing payments, and managing users. We deploy it on <strong>Render</strong> (free tier).</p>
+
+    <h4>Push Code to GitHub First</h4>
+    <div class="card">
+      <h4>💻 Run these commands in terminal:</h4>
+      <pre>cd /home/jkaushik/Solar/suryaclean-app/backend
+git init
+git add .
+git commit -m "Initial SuryaClean backend"
+
+# Create a repo on github.com, then:
+git remote add origin https://github.com/YOUR_USERNAME/suryaclean-backend.git
+git push -u origin main</pre>
+    </div>
+
+    <h4>Deploy on Render</h4>
+    <ol>
+      <li>Go to <a href="https://render.com" target="_blank"><strong>render.com</strong></a> → Sign up with GitHub</li>
+      <li>Click <strong>"New +"</strong> → <strong>"Web Service"</strong></li>
+      <li>Connect repo: <code>suryaclean-backend</code></li>
+      <li>Configure:
+        <ul>
+          <li>Name: <code>suryaclean-api</code></li>
+          <li>Runtime: <strong>Node</strong></li>
+          <li>Build Command: <code>npm install</code></li>
+          <li>Start Command: <code>node index.js</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <h4>🔑 Add Environment Variables</h4>
+    <div class="card success">
+      <p>In Render → <strong>Environment</strong> tab, add these variables using the values from Steps 2 & 3:</p>
+      <pre>FIREBASE_PROJECT_ID=suryaclean
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your-project.iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nYOUR_KEY_HERE\n-----END PRIVATE KEY-----
+FIREBASE_DATABASE_URL=https://suryaclean.firebaseio.com
+RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxx
+RAZORPAY_KEY_SECRET=your_live_razorpay_secret
+PORT=5000
+NODE_ENV=production
+ALLOWED_ORIGINS=https://suryaclean.in,https://www.suryaclean.in</pre>
+    </div>
+
+    <ol start="6">
+      <li>Click <strong>"Create Web Service"</strong></li>
+      <li>✅ Your API is live at: <code>https://suryaclean-api.onrender.com</code></li>
+    </ol>
+
+    <div class="card warning">
+      <h4>💡 Free Tier Note</h4>
+      <p>Render's free tier puts your service to <strong>sleep after 15 minutes of no traffic</strong>. First request takes ~30 seconds to wake up. To keep it always awake, either:</p>
+      <ul>
+        <li>Upgrade to $7/month plan (recommended when you have real customers)</li>
+        <li>Or setup a free cron job at <a href="https://cron-job.org" target="_blank">cron-job.org</a> to ping every 10 minutes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: WEBSITE -->
+<div class="step-section" data-step="4">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number vercel">🌍</div>
+    <div class="step-info">
+      <h3>Step 5: Deploy Website (Vercel)</h3>
+      <div class="step-meta"><span>⏱ 10 min</span><span class="tag tag-free">Free</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>Vercel is built by the creators of Next.js — it's the fastest, easiest way to deploy your website. <strong>100% free</strong> for the traffic you'll get initially.</p>
+
+    <h4>Push Code to GitHub</h4>
+    <div class="card">
+      <pre>cd /home/jkaushik/Solar/suryaclean-app/web
+git init
+git add .
+git commit -m "Initial SuryaClean website"
+git remote add origin https://github.com/YOUR_USERNAME/suryaclean-web.git
+git push -u origin main</pre>
+    </div>
+
+    <h4>Deploy on Vercel</h4>
+    <ol>
+      <li>Go to <a href="https://vercel.com" target="_blank"><strong>vercel.com</strong></a> → Sign up with GitHub</li>
+      <li>Click <strong>"Add New"</strong> → <strong>"Project"</strong></li>
+      <li>Import repo: <code>suryaclean-web</code></li>
+      <li>Framework: Next.js (auto-detected)</li>
+    </ol>
+
+    <h4>🔑 Add Environment Variables</h4>
+    <p>In Vercel → <strong>Environment Variables</strong>, paste these:</p>
+    <div class="card success">
+      <pre>NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSy...        ← from Firebase Step 3.4
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=suryaclean.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=suryaclean
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=suryaclean.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
+NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
+NEXT_PUBLIC_API_URL=https://suryaclean-api.onrender.com   ← from Step 4
+NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_live_xxxx                 ← from Step 3</pre>
+    </div>
+
+    <ol start="6">
+      <li>Click <strong>"Deploy"</strong></li>
+      <li>✅ Website is LIVE at: <code>https://suryaclean-web.vercel.app</code></li>
+    </ol>
+  </div>
+</div>
+
+<!-- STEP 5: DNS -->
+<div class="step-section" data-step="5">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number domain">🔗</div>
+    <div class="step-info">
+      <h3>Step 6: Connect Domain to Website</h3>
+      <div class="step-meta"><span>⏱ 5 min setup + 1-60 min DNS propagation</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>Your website is live at a Vercel URL, but you want it on <code>suryaclean.in</code>.</p>
+
+    <h4>In Vercel:</h4>
+    <ol>
+      <li>Vercel Dashboard → Your project → <strong>Settings</strong> → <strong>Domains</strong></li>
+      <li>Add: <code>suryaclean.in</code></li>
+      <li>Vercel shows you DNS records to add</li>
+    </ol>
+
+    <h4>At Your Domain Registrar (Namecheap/GoDaddy):</h4>
+    <ol>
+      <li>Find <strong>DNS Settings / Advanced DNS</strong></li>
+      <li>Add these records:</li>
+    </ol>
+    <div class="card">
+      <table>
+        <tr><th>Type</th><th>Name</th><th>Value</th></tr>
+        <tr><td>A</td><td>@</td><td>76.76.21.21 (Vercel's IP)</td></tr>
+        <tr><td>CNAME</td><td>www</td><td>cname.vercel-dns.com</td></tr>
+      </table>
+    </div>
+    <ol start="3">
+      <li>Wait 5-60 minutes → Visit <code>https://suryaclean.in</code></li>
+    </ol>
+
+    <div class="card info">
+      <h4>🎯 Bonus: Custom Backend Subdomain</h4>
+      <p>Make your backend professional by putting it on <code>api.suryaclean.in</code>:</p>
+      <ol>
+        <li>In Render → Settings → add Custom Domain: <code>api.suryaclean.in</code></li>
+        <li>Add a CNAME record in your DNS: <strong>api</strong> → <strong>your-render-url.onrender.com</strong></li>
+        <li>Update website env: <code>NEXT_PUBLIC_API_URL=https://api.suryaclean.in</code></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: PLAY STORE -->
+<div class="step-section" data-step="6">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number playstore">📱</div>
+    <div class="step-info">
+      <h3>Step 7: Deploy Android App (Play Store)</h3>
+      <div class="step-meta"><span>⏱ 2-3 days (review)</span><span class="tag tag-paid">₹1,500 one-time</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>Your Flutter app runs on both Android and iOS. Start with Android — <strong>95% of your Faridabad customers use Android phones</strong>.</p>
+
+    <h4>7.1 Update Production Config</h4>
+    <p>In <code>mobile/lib/main.dart</code>, change these two lines:</p>
+    <div class="card">
+      <pre>const String API_URL = 'https://suryaclean-api.onrender.com';
+const String RAZORPAY_KEY = 'rzp_live_xxxxxxxxxx';</pre>
+    </div>
+
+    <h4>7.2 Add Firebase Config</h4>
+    <ol>
+      <li>Copy <code>google-services.json</code> (from Firebase Step 3.5) into:<br><code>mobile/android/app/google-services.json</code></li>
+    </ol>
+
+    <h4>7.3 Create Play Console Account</h4>
+    <ol>
+      <li>Go to <a href="https://play.google.com/console" target="_blank"><strong>play.google.com/console</strong></a></li>
+      <li>Sign up → Pay <strong>₹1,500 (lifetime fee)</strong></li>
+      <li>Verify identity (PAN + Aadhaar)</li>
+      <li>Wait 1-2 days for approval</li>
+    </ol>
+
+    <h4>7.4 Build & Upload</h4>
+    <div class="card">
+      <pre>cd /home/jkaushik/Solar/suryaclean-app/mobile
+flutter build appbundle --release
+# Output: build/app/outputs/bundle/release/app-release.aab</pre>
+    </div>
+
+    <h4>7.5 Fill App Store Listing</h4>
+    <ul>
+      <li><strong>App Name:</strong> SuryaClean — Solar Panel Cleaning</li>
+      <li><strong>Short Description:</strong> "Solar panel cleaning in Faridabad. Book via UPI."</li>
+      <li><strong>Category:</strong> Business or Home & Garden</li>
+      <li><strong>Screenshots:</strong> Take 6 screenshots from the running app</li>
+      <li><strong>Privacy Policy URL:</strong> <code>https://suryaclean.in/privacy</code></li>
+      <li><strong>Pricing:</strong> Free</li>
+      <li><strong>Countries:</strong> India</li>
+    </ul>
+
+    <div class="card info">
+      <h4>💡 Skip iOS for Now</h4>
+      <p>Apple Developer Program costs <strong>$99/year</strong> + requires a Mac to build. <strong>95% of your customers use Android.</strong> Add iOS in Year 2 when you have revenue.</p>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 7: TEST -->
+<div class="step-section" data-step="7">
+  <div class="step-header open" onclick="toggleStep(this)">
+    <div class="step-number test">✔️</div>
+    <div class="step-info">
+      <h3>Step 8: Final Testing Checklist</h3>
+      <div class="step-meta"><span>⏱ 10 min</span><span class="tag tag-free">Critical</span></div>
+    </div>
+    <span class="step-toggle">▼</span>
+  </div>
+  <div class="step-body open">
+    <p>Before telling anyone about your service, <strong>verify every flow works on the LIVE website at suryaclean.in</strong>.</p>
+
+    <ul class="checklist" id="testChecklist">
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Open <code>suryaclean.in</code> — website loads with hero, pricing, AMC cards</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Click "Sign in with Google" — Google popup appears, login works</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> After login — navbar shows your name and profile picture</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Go to <code>/book</code> — fill system size, address → Continue → select date & time</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Click "Pay ₹899" → Razorpay checkout opens → Pay via UPI (₹1 test payment)</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Booking confirmed → Booking ID shown → appears in Dashboard</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Go to <code>/amc</code> → subscribe to Standard plan → pay via UPI</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> AMC appears in Dashboard → scheduled visits calendar visible</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Dashboard "Transactions" tab → shows all payment history</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Logout → Login again → all data persists correctly</li>
+      <li><span class="check" onclick="this.classList.toggle('checked');updateProgress()"></span> Open the Android app → same Google login works → same bookings visible</li>
+    </ul>
+  </div>
+</div>
+
+</div></div>
+
+<!-- ====== COST SUMMARY ====== -->
+<div class="section" style="background:white;padding:48px 0;"><div class="container">
+  <h2 style="text-align:center;font-size:28px;margin-bottom:32px;">💰 What It Costs to Go Live</h2>
+  <div class="cost-grid">
+    <div class="cost-card"><div class="amount">₹800</div><div class="label">Domain (1 year)</div></div>
+    <div class="cost-card"><div class="amount">₹0</div><div class="label">Firebase (Google Login + DB)</div></div>
+    <div class="cost-card"><div class="amount">₹0</div><div class="label">Render (Backend Hosting)</div></div>
+    <div class="cost-card"><div class="amount">₹0</div><div class="label">Vercel (Website Hosting)</div></div>
+    <div class="cost-card"><div class="amount">₹0</div><div class="label">Razorpay (Sign Up)</div></div>
+    <div class="cost-card"><div class="amount">₹1,500</div><div class="label">Play Store (Lifetime)</div></div>
+    <div class="cost-card cost-total"><div class="amount">₹2,300</div><div class="label">TOTAL ONE-TIME</div></div>
+  </div>
+  <p style="text-align:center;color:#888;margin-top:24px;font-size:14px;">After launch: only variable cost is <strong>2% Razorpay fee per transaction</strong> (UPI is free). Hosting remains free until you scale.</p>
+</div></div>
+
+<!-- ====== TIMELINE ====== -->
+<div class="section" style="padding:48px 0;background:#f8f9fa;"><div class="container">
+  <h2 style="text-align:center;font-size:28px;margin-bottom:32px;">📅 7-Day Launch Timeline</h2>
+  <div class="timeline">
+    <div class="timeline-item"><div class="date">Day 1</div><div class="desc"><strong>Buy domain</strong> (10 min) + <strong>Setup Firebase</strong> (15 min) + <strong>Deploy backend</strong> (15 min) + <strong>Deploy website</strong> (10 min). Done in 1 hour.</div></div>
+    <div class="timeline-item"><div class="date">Day 1-2</div><div class="desc"><strong>Sign up for Razorpay</strong> and submit KYC documents. <strong>Create Play Console account</strong> and pay ₹1,500 (identity verification).</div></div>
+    <div class="timeline-item"><div class="date">Day 1-5</div><div class="desc"><strong>Wait for Razorpay KYC approval</strong> (3-5 business days). Meanwhile: connect domain to Vercel, setup Zoho email, take app screenshots.</div></div>
+    <div class="timeline-item"><div class="date">Day 5</div><div class="desc">Razorpay approved → get Live keys → update Backend + Website env vars → <strong>full payment flow works!</strong></div></div>
+    <div class="timeline-item"><div class="date">Day 5-7</div><div class="desc">Play Console approved → build & upload Android app → fill store listing → <strong>submit for review</strong> (1-7 days).</div></div>
+    <div class="timeline-item"><div class="date">Day 7+</div><div class="desc">🎉 <strong>LIVE!</strong> → Get 10 Google reviews → Start Google Ads → Visit 5 solar installers for referral partnerships.</div></div>
+  </div>
+</div></div>
+
+<!-- ====== ENV MASTER SHEET ====== -->
+<div class="section" style="background:white;padding:48px 0;"><div class="container">
+  <h2 style="text-align:center;font-size:28px;margin-bottom:32px;">🔐 Environment Variables — Fill & Keep Safe</h2>
+  <div class="card">
+    <h4>Print this. Fill in YOUR values. Keep it in a safe place (NOT on GitHub).</h4>
+  </div>
+  <div class="env-block" style="margin-top:20px;position:relative;">
+    <button class="copy-btn" onclick="copyEnvBlock()" id="copyBtn">📋 Copy All</button>
+<span class="comment"># ============================================</span>
+<span class="comment"># SURYACLEAN PRODUCTION ENVIRONMENT VARIABLES</span>
+<span class="comment"># ============================================</span>
+
+<span class="comment"># --- Firebase Web App (from console.firebase.google.com → Project Settings)</span>
+<span class="key">NEXT_PUBLIC_FIREBASE_API_KEY</span>=_________________________________
+<span class="key">NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN</span>=_______________.firebaseapp.com
+<span class="key">NEXT_PUBLIC_FIREBASE_PROJECT_ID</span>=_______________________________
+<span class="key">NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET</span>=______________.appspot.com
+<span class="key">NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID</span>=_____________________
+<span class="key">NEXT_PUBLIC_FIREBASE_APP_ID</span>=___________________________________
+
+<span class="comment"># --- Firebase Admin SDK (from downloaded private key JSON)</span>
+<span class="key">FIREBASE_PROJECT_ID</span>=__________________________________________
+<span class="key">FIREBASE_CLIENT_EMAIL</span>=________________________________________
+<span class="key">FIREBASE_PRIVATE_KEY</span>=-----BEGIN PRIVATE KEY-----
+______________________________________________________________
+-----END PRIVATE KEY-----
+<span class="key">FIREBASE_DATABASE_URL</span>=https://___________.firebaseio.com
+
+<span class="comment"># --- Razorpay (from dashboard.razorpay.com → Settings → API Keys)</span>
+<span class="key">NEXT_PUBLIC_RAZORPAY_KEY_ID</span>=rzp_live_________________________
+<span class="key">RAZORPAY_KEY_SECRET</span>=_________________________________________
+
+<span class="comment"># --- Backend URL (from Render/Railway)</span>
+<span class="key">NEXT_PUBLIC_API_URL</span>=https://__________________________________
+
+<span class="comment"># --- Domain</span>
+<span class="key">DOMAIN</span>=suryaclean.in
+  </div>
+
+  <h4 style="margin-top:24px;">📍 Where Each Key Goes</h4>
+  <table>
+    <tr><th>Variable</th><th>Goes In</th></tr>
+    <tr><td>NEXT_PUBLIC_FIREBASE_*</td><td>Vercel Env Vars (website)</td></tr>
+    <tr><td>FIREBASE_* (admin SDK)</td><td>Render Env Vars (backend)</td></tr>
+    <tr><td>NEXT_PUBLIC_RAZORPAY_KEY_ID</td><td>Vercel + Flutter main.dart</td></tr>
+    <tr><td>RAZORPAY_KEY_SECRET</td><td>Render (backend) ONLY — NEVER frontend</td></tr>
+    <tr><td>NEXT_PUBLIC_API_URL</td><td>Vercel + Flutter main.dart</td></tr>
+    <tr><td>google-services.json</td><td>mobile/android/app/</td></tr>
+    <tr><td>GoogleService-Info.plist</td><td>mobile/ios/Runner/</td></tr>
+  </table>
+</div></div>
+
+<!-- ====== NEXT STEPS ====== -->
+<div style="background:linear-gradient(135deg, var(--gold), #e8951a);padding:48px 0;text-align:center;color:white;">
+  <div class="container">
+    <h2 style="font-size:28px;font-weight:700;">🚀 After Going Live — First Week Actions</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px;text-align:left;">
+      <div style="background:rgba(255,255,255,0.12);padding:20px;border-radius:12px;"><strong>1.</strong> Ask 5 friends to book a ₹1 test cleaning (refund them manually)</div>
+      <div style="background:rgba(255,255,255,0.12);padding:20px;border-radius:12px;"><strong>2.</strong> Get 10+ Google reviews from friends & first customers</div>
+      <div style="background:rgba(255,255,255,0.12);padding:20px;border-radius:12px;"><strong>3.</strong> Start Google Ads — ₹200/day targeting "solar cleaning Faridabad"</div>
+      <div style="background:rgba(255,255,255,0.12);padding:20px;border-radius:12px;"><strong>4.</strong> Post weekly on Google Business Profile (before/after photos)</div>
+      <div style="background:rgba(255,255,255,0.12);padding:20px;border-radius:12px;"><strong>5.</strong> Visit 5 solar installers in Faridabad — offer 10% referral commission</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" id="scrollTopBtn">↑</button>
+
+<script>
+// Toggle step sections
+function toggleStep(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+// Scroll to top button visibility
+window.addEventListener('scroll', function() {
+  document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 500);
+});
+
+// Update progress bar
+function updateProgress() {
+  const checks = document.querySelectorAll('#testChecklist .check.checked');
+  const total = document.querySelectorAll('#testChecklist .check');
+  document.getElementById('testProgress').textContent = checks.length + '/' + total.length;
+}
+
+// Copy env block
+function copyEnvBlock() {
+  const block = document.querySelector('.env-block');
+  const text = block.innerText.replace('📋 Copy All\n', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy All', 2000);
+  });
+}
+
+// Progress step click to scroll
+document.querySelectorAll('.progress-step').forEach(el => {
+  el.addEventListener('click', function() {
+    const step = this.dataset.step;
+    const target = document.querySelector(`.step-section[data-step="${step}"]`);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Initial state
+document.addEventListener('DOMContentLoaded', function() {
+  updateProgress();
+});
+</script>
+</body>
+</html>
