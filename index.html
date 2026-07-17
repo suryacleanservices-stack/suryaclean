@@ -32,6 +32,7 @@ nav a{color:#ccc;text-decoration:none;font-size:11px;font-weight:500;cursor:poin
 .bdb{background:#fff3e0;color:#e65100}.bdh{background:#fce4ec;color:#c62828}.bdn{background:#e8f5e9;color:#2e7d32}
 .prod{text-align:center;transition:transform .2s;cursor:pointer;overflow:hidden}
 .prod:hover{transform:translateY(-3px)}.prod .ic{font-size:44px;display:block;margin-bottom:4px}
+.prod .pimg{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:6px}
 .prod h4{font-size:12px}.prod .sp{font-size:9px;color:#888;line-height:1.3;margin-bottom:2px}.prod .tag{font-size:8px;color:#999}
 .modal-o{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:300;display:flex;align-items:center;justify-content:center}
 .modal-o>div{background:#fff;border-radius:var(--rd);max-width:560px;width:94%;max-height:85vh;overflow-y:auto;padding:24px;position:relative}
@@ -176,7 +177,7 @@ const TL={};
 ['en','hi','pa','gu','bn'].forEach(l=>TL[l]={});
 
 // RENDER PRODUCTS
-document.getElementById('pgrid').innerHTML=P.map(p=>`<div class="ca prod" onclick="openP('${p.id}')"><span class="ic">${p.ic}</span><span class="bd ${p.bd}">${p.btxt}</span><h4>${p.nm}</h4><p class="sp">${p.sp}</p><div class="prs">₹${p.pr.toLocaleString()}</div><p class="tag">Click for details →</p></div>`).join('');
+document.getElementById('pgrid').innerHTML=P.map(p=>`<div class="ca prod" onclick="openP('${p.id}')"><img src="${p.imgs[0]}" class="pimg" alt="${p.nm}" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('.ic').style.display='block'"><span class="ic" style="display:none">${p.ic}</span><span class="bd ${p.bd}">${p.btxt}</span><h4>${p.nm}</h4><p class="sp">${p.sp}</p><div class="prs">₹${p.pr.toLocaleString()}</div><p class="tag">Click for details →</p></div>`).join('');
 
 function openP(id){var p=P.find(x=>x.id===id);if(!p)return;
 document.getElementById('mcont').innerHTML='<span class="cls" onclick="closeM()">✕</span><div style="font-size:44px;text-align:center;margin-bottom:6px">'+p.ic+'</div><span class="bd '+p.bd+'">'+p.btxt+'</span><h3>'+p.nm+'</h3><div style="font-size:22px;font-weight:800;color:var(--g)">₹'+p.pr.toLocaleString()+'</div><p style="font-size:11px;color:#888">Compatible: '+p.cl+'</p><div class="gal">'+p.imgs.map(u=>'<img src="'+u+'" loading="lazy" onerror="this.style.display=\'none\'">').join('')+'</div><h4 style="margin:6px 0 2px">📋 Specs</h4><table>'+p.ft.split('|').map(f=>'<tr><td>•</td><td>'+f+'</td></tr>').join('')+'</table><h4 style="margin:6px 0 2px">⭐ Reviews</h4><div class="rev">'+p.rv.map(r=>'<div class="rv"><div class="st">'+'★'.repeat(r.r)+'☆'.repeat(5-r.r)+'</div><strong>'+r.n+'</strong><br>'+r.t+'</div>').join('')+'</div><button class="btn bg" onclick="addCart(\''+p.id+'\',\''+p.nm+'\',\''+p.pr.toLocaleString()+'\','+p.pr+',\''+p.ic+'\');closeM()" style="width:100%;margin-top:6px">🛒 Add to Cart — ₹'+p.pr.toLocaleString()+'</button>';
